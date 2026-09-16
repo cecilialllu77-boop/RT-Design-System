@@ -1,0 +1,111 @@
+{
+  "pages": {
+    "home": {
+      "title": "Introduction",
+      "description": "RT Design System is a comprehensive design system for building consistent, accessible, and beautiful user interfaces.",
+      "overview": "This design system provides a set of reusable components, design tokens, and guidelines to help you build cohesive user experiences.",
+      "principles": [
+        { "title": "Consistent", "description": "A unified design language across all products and platforms." },
+        { "title": "Accessible", "description": "Built with accessibility as a first-class concern." },
+        { "title": "Composable", "description": "Small, focused components that combine to build complex UIs." },
+        { "title": "Themeable", "description": "Supports light and dark themes with customizable tokens." }
+      ]
+    },
+    "installation": {
+      "title": "Installation",
+      "description": "Get started with RT Design System in your project.",
+      "setupGuide": "Import the CSS and wrap your app with the theme provider."
+    },
+    "colors": {
+      "title": "Colors",
+      "description": "The color system provides a unified palette for building consistent interfaces across light and dark themes."
+    },
+    "typography": {
+      "title": "Typography",
+      "description": "Typography tokens and guidelines for consistent text rendering."
+    },
+    "icons": {
+      "title": "Icons",
+      "description": "Icon guidelines and usage patterns for the design system."
+    },
+    "spacing": {
+      "title": "Spacing",
+      "description": "A consistent spacing scale for margins, padding, and gaps."
+    },
+    "components-button": {
+      "title": "Button",
+      "description": "Trigger an action or event, such as submitting a form or opening a dialog."
+    },
+    "components-avatar": { "title": "Avatar", "description": "Display user profile images or initials in a consistent format." },
+    "components-badge": { "title": "Badge", "description": "Highlight status or categorize items with small labels." },
+    "components-checkbox": { "title": "Checkbox", "description": "Allow users to select one or more items from a set." },
+    "components-input": { "title": "Input", "description": "Single-line text input field for forms." },
+    "components-modal": { "title": "Modal", "description": "A dialog overlay that requires user interaction." },
+    "components-select": { "title": "Select", "description": "A dropdown selector for choosing from a list of options." },
+    "components-switch": { "title": "Switch", "description": "Toggle between two states like on and off." },
+    "components-tabs": { "title": "Tabs", "description": "Organize content into switchable views." },
+    "components-toast": { "title": "Toast", "description": "Brief notification messages that appear temporarily." },
+    "components-tooltip": { "title": "Tooltip", "description": "Show additional information on hover." }
+  },
+  "navigation": [
+    {
+      "title": "Getting Started",
+      "items": [
+        { "title": "Introduction", "href": "/" },
+        { "title": "Installation", "href": "/installation" }
+      ]
+    },
+    {
+      "title": "Foundation",
+      "items": [
+        { "title": "Colors", "href": "/colors" },
+        { "title": "Typography", "href": "/typography" },
+        { "title": "Icons", "href": "/icons" },
+        { "title": "Spacing", "href": "/spacing" }
+      ]
+    },
+    {
+      "title": "Components",
+      "items": [
+        { "title": "Avatar", "href": "/components/avatar" },
+        { "title": "Badge", "href": "/components/badge" },
+        { "title": "Button", "href": "/components/button" },
+        { "title": "Checkbox", "href": "/components/checkbox" },
+        { "title": "Code Block", "href": "/components/code-block" },
+        { "title": "Collapse", "href": "/components/collapse" },
+        { "title": "Context Menu", "href": "/components/context-menu" },
+        { "title": "Description", "href": "/components/description" },
+        { "title": "Drawer", "href": "/components/drawer" },
+        { "title": "Error", "href": "/components/error" },
+        { "title": "Feedback", "href": "/components/feedback" },
+        { "title": "Input", "href": "/components/input" },
+        { "title": "Kbd", "href": "/components/kbd" },
+        { "title": "Loading", "href": "/components/loading" },
+        { "title": "Menu", "href": "/components/menu" },
+        { "title": "Modal", "href": "/components/modal" },
+        { "title": "Note", "href": "/components/note" },
+        { "title": "Pagination", "href": "/components/pagination" },
+        { "title": "Popover", "href": "/components/popover" },
+        { "title": "Progress", "href": "/components/progress" },
+        { "title": "Radio", "href": "/components/radio" },
+        { "title": "Select", "href": "/components/select" },
+        { "title": "Skeleton", "href": "/components/skeleton" },
+        { "title": "Slider", "href": "/components/slider" },
+        { "title": "Snippet", "href": "/components/snippet" },
+        { "title": "Spinner", "href": "/components/spinner" },
+        { "title": "Stack", "href": "/components/stack" },
+        { "title": "Status Dot", "href": "/components/status-dot" },
+        { "title": "Switch", "href": "/components/switch" },
+        { "title": "Table", "href": "/components/table" },
+        { "title": "Tabs", "href": "/components/tabs" },
+        { "title": "Text", "href": "/components/text" },
+        { "title": "Textarea", "href": "/components/textarea" },
+        { "title": "Theme Switcher", "href": "/components/theme-switcher" },
+        { "title": "Toast", "href": "/components/toast" },
+        { "title": "Toggle", "href": "/components/toggle" },
+        { "title": "Tooltip", "href": "/components/tooltip" },
+        { "title": "Window", "href": "/components/window" }
+      ]
+    }
+  ]
+}
