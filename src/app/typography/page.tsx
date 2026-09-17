@@ -2,14 +2,10 @@ import { PageHeader } from "@/components/page-header";
 import { Section } from "@/components/section";
 
 const typeScale = [
-  { name: "Display", size: "48px", weight: "700", lineHeight: "1.1", tag: "h1" },
-  { name: "Heading 1", size: "36px", weight: "700", lineHeight: "1.2", tag: "h1" },
-  { name: "Heading 2", size: "24px", weight: "600", lineHeight: "1.3", tag: "h2" },
-  { name: "Heading 3", size: "20px", weight: "600", lineHeight: "1.4", tag: "h3" },
-  { name: "Heading 4", size: "16px", weight: "600", lineHeight: "1.5", tag: "h4" },
-  { name: "Body", size: "14px", weight: "400", lineHeight: "1.6", tag: "p" },
-  { name: "Small", size: "13px", weight: "400", lineHeight: "1.5", tag: "small" },
-  { name: "Caption", size: "12px", weight: "400", lineHeight: "1.5", tag: "span" },
+  { name: "H1", label: "Primary Title", size: "18px", weight: "600", lineHeight: "1.4", color: "#FFFFFF" },
+  { name: "P1", label: "Content Text", size: "14px", weight: "400", lineHeight: "1.6", color: "#DCE0F2" },
+  { name: "H2", label: "Secondary Title", size: "16px", weight: "600", lineHeight: "1.5", color: "#DCE0F2" },
+  { name: "P2", label: "Secondary Text", size: "12px", weight: "400", lineHeight: "1.5", color: "#CFCFCF" },
 ];
 
 export default function TypographyPage() {
@@ -17,7 +13,7 @@ export default function TypographyPage() {
     <>
       <PageHeader
         title="Typography"
-        description="Typography tokens and guidelines for consistent text rendering."
+        description="Typography tokens and guidelines for consistent text rendering in the Radiotherapy Cloud platform."
       />
 
       <Section
@@ -46,17 +42,17 @@ export default function TypographyPage() {
 
       <Section
         title="Type Scale"
-        description="A consistent scale for all text sizes used in the design system."
+        description="The type hierarchy used across the application, with designated colors for each level."
       >
         <div className="border border-border rounded-lg overflow-hidden">
           {typeScale.map((type, i) => (
             <div
               key={type.name}
-              className={`flex items-baseline gap-4 px-4 py-3 ${
+              className={`flex items-center gap-4 px-4 py-4 ${
                 i < typeScale.length - 1 ? "border-b border-border" : ""
               }`}
             >
-              <div className="w-24 shrink-0">
+              <div className="w-12 shrink-0">
                 <span className="text-xs font-mono text-muted">{type.name}</span>
               </div>
               <div className="flex-1">
@@ -67,13 +63,23 @@ export default function TypographyPage() {
                     lineHeight: type.lineHeight,
                   }}
                 >
-                  The quick brown fox
+                  {type.label}
                 </p>
               </div>
-              <div className="hidden sm:block text-right">
-                <span className="text-xs font-mono text-muted">
-                  {type.size} / {type.weight}
-                </span>
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-5 h-5 rounded border border-border shrink-0"
+                  style={{ backgroundColor: type.color }}
+                />
+                <div className="text-right">
+                  <span className="text-xs font-mono text-muted">
+                    {type.size} / {type.weight}
+                  </span>
+                  <br />
+                  <span className="text-xs font-mono text-muted">
+                    {type.color}
+                  </span>
+                </div>
               </div>
             </div>
           ))}

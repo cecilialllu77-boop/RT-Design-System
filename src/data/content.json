@@ -18,11 +18,11 @@
     },
     "colors": {
       "title": "Colors",
-      "description": "The color system provides a unified palette for building consistent interfaces across light and dark themes."
+      "description": "The color system is composed of primary colors, extended palettes, and semantic alert colors for the Radiotherapy Cloud platform."
     },
     "typography": {
       "title": "Typography",
-      "description": "Typography tokens and guidelines for consistent text rendering."
+      "description": "Typography tokens and guidelines for consistent text rendering in the Radiotherapy Cloud platform."
     },
     "icons": {
       "title": "Icons",

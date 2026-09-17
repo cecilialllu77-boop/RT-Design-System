@@ -40,8 +40,8 @@ export default function SpacingPage() {
               </span>
               <div className="flex-1">
                 <div
-                  className="h-3 bg-success/20 rounded"
-                  style={{ width: space.value }}
+                  className="h-3 rounded"
+                  style={{ width: space.value, backgroundColor: 'rgba(59, 155, 77, 0.2)' }}
                 />
               </div>
               <span className="text-xs font-mono text-muted">{space.value}</span>
