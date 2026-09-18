@@ -501,6 +501,31 @@
     border-radius: 8px 8px 0 0;
   }
 
+  .code-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 8px 16px;
+    border: none;
+    border-top: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--fg-muted);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .code-toggle:hover { color: var(--fg); }
+  .code-toggle .toggle-icon {
+    display: inline-block;
+    transition: transform 0.2s;
+    font-size: 10px;
+  }
+  .code-toggle.expanded .toggle-icon { transform: rotate(90deg); }
+  .code-toggle:not(.expanded) + .example-code { display: none; }
+  .code-toggle:not(.expanded) { border-radius: 0 0 8px 8px; }
+
   .example-code {
     border-top: 1px solid var(--border);
     border-radius: 0 0 8px 8px;
@@ -1953,6 +1978,19 @@
   initRangePicker('rangeDropdown1', 'rangeStartInput1', 'rangeEndInput1', 'rangeNavTitle1', 'rangeDays1');
   initMonthPicker('monthDropdown1', 'monthInput1', 'monthNavTitle1', 'monthGrid1');
   initYearPicker('yearDropdown1', 'yearInput1', 'yearNavTitle1', 'yearGrid1');
+
+  document.querySelectorAll('.example-code').forEach(function(codeEl) {
+    var toggle = document.createElement('button');
+    toggle.className = 'code-toggle';
+    toggle.innerHTML = '<span class="toggle-icon">▶</span> Show Code';
+    toggle.addEventListener('click', function() {
+      var expanded = toggle.classList.toggle('expanded');
+      toggle.innerHTML = expanded
+        ? '<span class="toggle-icon">▶</span> Hide Code'
+        : '<span class="toggle-icon">▶</span> Show Code';
+    });
+    codeEl.parentNode.insertBefore(toggle, codeEl);
+  });
 
   buildSearchIndex();
 </script>
