@@ -1977,7 +1977,7 @@
     if (!overlay) {
       overlay = document.createElement('div');
       overlay.id = s.inputId + '_overlay';
-      overlay.style.cssText = 'position:absolute;top:0;left:0;right:32px;height:100%;display:flex;align-items:center;padding:0 10px;pointer-events:none;font-size:14px;font-family:var(--font-sans);';
+      overlay.style.cssText = 'position:absolute;top:0;left:0;right:32px;height:100%;display:flex;align-items:center;gap:5px;padding:0 10px;pointer-events:none;font-size:14px;font-family:var(--font-sans);';
       input.parentNode.appendChild(overlay);
     }
     if (s.start && s.end) {
@@ -1986,7 +1986,7 @@
     } else if (s.start) {
       input.value = '';
       overlay.style.display = 'flex';
-      overlay.innerHTML = '<span style="color:var(--fg)">' + s.start + '-</span><span style="color:var(--fg-muted)">结束日期</span>';
+      overlay.innerHTML = '<span style="color:var(--fg)">' + s.start + '</span><span style="color:var(--fg-muted)">-</span><span style="color:var(--fg-muted)">结束日期</span>';
     } else {
       input.value = '';
       overlay.style.display = 'none';
