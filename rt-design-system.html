@@ -1949,7 +1949,8 @@
     }
     daysEl.innerHTML = html;
     daysEl.querySelectorAll('.cal-day').forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
         const d = this.dataset.date;
         if (!d) return;
         if (s.picking === 'start') {
