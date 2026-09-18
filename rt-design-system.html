@@ -758,11 +758,32 @@
   }
 
   .cal-days {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(7, 30px);
     gap: 2px;
     justify-content: center;
     padding: 0 15px;
+  }
+
+  .cal-range-panel .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    padding: 0 15px;
+  }
+
+  .cal-range-panel .cal-weekday {
+    width: auto;
+  }
+
+  .cal-range-panel .cal-days {
+    gap: 0;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .cal-range-panel .cal-day {
+    width: auto;
+    height: 30px;
   }
 
   .cal-day {
@@ -824,6 +845,10 @@
   .cal-range-panel {
     width: 252px;
     flex-shrink: 0;
+  }
+
+  .cal-range-panel:first-child {
+    border-right: 1px solid #3A3E47;
   }
 
   .cal-months {
@@ -1347,7 +1372,7 @@
             <div class="cal-field" id="rangePicker1">
               <span class="cal-label">日期范围</span>
               <div class="cal-input-wrap" style="width: 280px;">
-                <input class="cal-input" type="text" placeholder="开始日期 — 结束日期" readonly id="rangeInput1">
+                <input class="cal-input" type="text" placeholder="开始日期-结束日期" readonly id="rangeInput1">
                 <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
                 <div class="cal-range-dropdown" id="rangeDropdown1" hidden>
                   <div class="cal-range-panel" id="rangeLeftPanel1">
@@ -1948,8 +1973,8 @@
 
   function updateRangeInput(s) {
     const input = document.getElementById(s.inputId);
-    if (s.start && s.end) input.value = s.start + ' — ' + s.end;
-    else if (s.start) input.value = s.start + ' — ';
+    if (s.start && s.end) input.value = s.start + '-' + s.end;
+    else if (s.start) input.value = s.start + '-';
     else input.value = '';
   }
 
