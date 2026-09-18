@@ -1609,85 +1609,55 @@
       </div>
 
       <div class="section">
-        <h2 class="section-title">States</h2>
+        <h2 class="section-title">Default</h2>
         <div class="example-block">
-          <div class="example-preview">
-            <div class="input-row">
-              <div class="input-demo-col">
-                <div class="input-group">
-                  <span class="input-label">Label</span>
-                  <input class="input-field" type="text" placeholder="Placeholder">
-                </div>
-                <span class="input-state-label">Default</span>
-              </div>
-              <div class="input-demo-col">
-                <div class="input-group">
-                  <span class="input-label">Label</span>
-                  <input class="input-field" type="text" placeholder="Placeholder" style="border-color: var(--primary);">
-                </div>
-                <span class="input-state-label">Hover</span>
-              </div>
-              <div class="input-demo-col">
-                <div class="input-group">
-                  <span class="input-label">Label</span>
-                  <input class="input-field" type="text" placeholder="Placeholder" style="border-color: var(--primary);">
-                </div>
-                <span class="input-state-label">Focus</span>
-              </div>
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="input-group">
+              <span class="input-label">姓名</span>
+              <input class="input-field" type="text" placeholder="请输入姓名">
             </div>
-            <div class="input-row" style="margin-top: 20px;">
-              <div class="input-demo-col">
-                <div class="input-group">
-                  <span class="input-label">Label</span>
-                  <input class="input-field" type="text" value="Input text">
-                </div>
-                <span class="input-state-label">Filled</span>
-              </div>
-              <div class="input-demo-col">
-                <div class="input-group">
-                  <span class="input-label">Label</span>
-                  <input class="input-field input-error" type="text" value="Invalid input">
-                </div>
-                <span class="input-state-label">Error</span>
-              </div>
-              <div class="input-demo-col">
-                <div class="input-group">
-                  <span class="input-label">Label</span>
-                  <input class="input-field" type="text" value="Disabled text" disabled>
-                </div>
-                <span class="input-state-label">Disabled</span>
-              </div>
+            <div class="input-group">
+              <span class="input-label">邮箱</span>
+              <input class="input-field" type="text" placeholder="请输入邮箱">
+            </div>
+            <div class="input-group">
+              <span class="input-label">备注</span>
+              <input class="input-field" type="text" placeholder="请输入备注" style="width: 350px;">
             </div>
           </div>
-          <div class="example-code">&lt;Input label="Label" placeholder="Placeholder" /&gt;
-&lt;Input label="Label" value="Input text" /&gt;
-&lt;Input label="Label" value="Invalid input" error /&gt;
-&lt;Input label="Label" value="Disabled text" disabled /&gt;</div>
+          <div class="example-code">&lt;Input label="姓名" placeholder="请输入姓名" /&gt;
+&lt;Input label="邮箱" placeholder="请输入邮箱" /&gt;
+&lt;Input label="备注" placeholder="请输入备注" width={350} /&gt;</div>
         </div>
       </div>
 
       <div class="section">
         <h2 class="section-title">Without Label</h2>
         <div class="example-block">
-          <div class="example-preview">
-            <div class="input-row">
-              <div class="input-demo-col">
-                <input class="input-field" type="text" placeholder="Placeholder">
-                <span class="input-state-label">Default</span>
-              </div>
-              <div class="input-demo-col">
-                <input class="input-field" type="text" value="Input text">
-                <span class="input-state-label">Filled</span>
-              </div>
-              <div class="input-demo-col">
-                <input class="input-field" type="text" value="Disabled text" disabled>
-                <span class="input-state-label">Disabled</span>
-              </div>
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <input class="input-field" type="text" placeholder="请输入内容">
+            <input class="input-field" type="text" placeholder="搜索...">
+          </div>
+          <div class="example-code">&lt;Input placeholder="请输入内容" /&gt;
+&lt;Input placeholder="搜索..." /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Disabled</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="input-group">
+              <span class="input-label">姓名</span>
+              <input class="input-field" type="text" value="张三" disabled>
+            </div>
+            <div class="input-group">
+              <span class="input-label">邮箱</span>
+              <input class="input-field" type="text" value="zhangsan@example.com" disabled>
             </div>
           </div>
-          <div class="example-code">&lt;Input placeholder="Placeholder" /&gt;
-&lt;Input value="Input text" /&gt;
-&lt;Input value="Disabled text" disabled /&gt;</div>
+          <div class="example-code">&lt;Input label="姓名" value="张三" disabled /&gt;
+&lt;Input label="邮箱" value="zhangsan@example.com" disabled /&gt;</div>
         </div>
       </div>
 
