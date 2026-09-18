@@ -715,6 +715,16 @@
     flex-direction: column;
     align-items: flex-start;
   }
+  .input-error-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .input-error-msg {
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 5px;
+    font-family: var(--font-sans);
+  }
 
   .cal-icon {
     position: absolute;
@@ -1644,6 +1654,30 @@
       </div>
 
       <div class="section">
+        <h2 class="section-title">Error</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="input-group">
+              <span class="input-label">邮箱</span>
+              <div class="input-error-wrap">
+                <input class="input-field input-error" type="text" value="invalid-email">
+                <span class="input-error-msg">请输入有效的邮箱地址</span>
+              </div>
+            </div>
+            <div class="input-group">
+              <span class="input-label">姓名</span>
+              <div class="input-error-wrap">
+                <input class="input-field input-error" type="text" value="">
+                <span class="input-error-msg">姓名不能为空</span>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Input label="邮箱" value="invalid-email" error errorMessage="请输入有效的邮箱地址" /&gt;
+&lt;Input label="姓名" error errorMessage="姓名不能为空" /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
         <h2 class="section-title">Disabled</h2>
         <div class="example-block">
           <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
@@ -1696,6 +1730,7 @@
               <tr><td><code>value</code></td><td><code>string</code></td><td>&mdash;</td><td>The current input value.</td></tr>
               <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether the input is disabled.</td></tr>
               <tr><td><code>error</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether to show error state styling.</td></tr>
+              <tr><td><code>errorMessage</code></td><td><code>string</code></td><td>&mdash;</td><td>Error message displayed below the input (requires error=true).</td></tr>
               <tr><td><code>onChange</code></td><td><code>(value: string) =&gt; void</code></td><td>&mdash;</td><td>Callback when value changes.</td></tr>
             </tbody>
           </table>
