@@ -778,7 +778,8 @@
   }
 
   .cal-range-panel .cal-days {
-    gap: 0;
+    row-gap: 2px;
+    column-gap: 0;
     grid-template-columns: repeat(7, 1fr);
   }
 
@@ -814,6 +815,8 @@
   .cal-day.range-start.range-end { border-radius: 2px; }
   .cal-day.in-range { background: rgba(59,155,77,0.15); color: #fff; border-radius: 0; }
   .cal-day.in-range:hover { background: rgba(59,155,77,0.3); }
+  .cal-day.hover-in-range { background: rgba(59,155,77,0.15); color: #fff; border-radius: 0; }
+  .cal-day.hover-range-end { background: rgba(59,155,77,0.5); color: #fff; }
 
   .cal-range-inputs {
     display: flex;
@@ -1922,6 +1925,29 @@
     const now = new Date();
     rangeState[dropdownId] = { year: now.getFullYear(), month: now.getMonth(), start: null, end: null, picking: 'start', inputId: inputId, titleLId: titleLId, titleRId: titleRId, daysLId: daysLId, daysRId: daysRId };
     renderRangePicker(dropdownId);
+    var containers = [document.getElementById(daysLId), document.getElementById(daysRId)];
+    function clearHover() {
+      containers.forEach(function(c) { c.querySelectorAll('.cal-day').forEach(function(b) { b.classList.remove('hover-in-range', 'hover-range-end'); }); });
+    }
+    containers.forEach(function(container) {
+      container.addEventListener('mouseover', function(e) {
+        var btn = e.target.closest('.cal-day');
+        var s = rangeState[dropdownId];
+        if (!btn || !btn.dataset.date || s.picking !== 'end') return;
+        clearHover();
+        var hd = btn.dataset.date, rs = s.start, re = hd;
+        if (hd < s.start) { rs = hd; re = s.start; }
+        containers.forEach(function(c) {
+          c.querySelectorAll('.cal-day').forEach(function(b) {
+            var d = b.dataset.date;
+            if (!d) return;
+            if (d === hd) b.classList.add('hover-range-end');
+            else if (d > rs && d < re) b.classList.add('hover-in-range');
+          });
+        });
+      });
+      container.addEventListener('mouseleave', clearHover);
+    });
   }
 
   function renderRangePanel(s, year, month, daysElId, dropdownId) {
