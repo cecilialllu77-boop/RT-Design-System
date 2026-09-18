@@ -762,6 +762,22 @@
   .cal-day.other-month:hover { color: #949393; background: none; cursor: default; }
   .cal-day.selected { background: rgba(59,155,77,0.5); color: #fff; }
   .cal-day.selected:hover { background: rgba(59,155,77,0.5); }
+  .cal-day.range-start { background: rgba(59,155,77,0.5); color: #fff; border-radius: 2px 0 0 2px; }
+  .cal-day.range-end { background: rgba(59,155,77,0.5); color: #fff; border-radius: 0 2px 2px 0; }
+  .cal-day.range-start.range-end { border-radius: 2px; }
+  .cal-day.in-range { background: rgba(59,155,77,0.15); color: #fff; border-radius: 0; }
+  .cal-day.in-range:hover { background: rgba(59,155,77,0.3); }
+
+  .cal-range-inputs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cal-range-separator {
+    color: var(--fg-muted);
+    font-size: 14px;
+  }
 
   .cal-months {
     display: grid;
@@ -1278,6 +1294,53 @@
       </div>
 
       <div class="section">
+        <h2 class="section-title">Date Range Picker</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px;">
+            <div class="cal-field" id="rangePicker1" style="flex-direction: column; align-items: flex-start;">
+              <span class="cal-label">日期范围</span>
+              <div class="cal-range-inputs" style="position: relative;">
+                <div class="cal-input-wrap">
+                  <input class="cal-input" type="text" placeholder="开始日期" readonly id="rangeStartInput1">
+                  <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
+                </div>
+                <span class="cal-range-separator">—</span>
+                <div class="cal-input-wrap">
+                  <input class="cal-input" type="text" placeholder="结束日期" readonly id="rangeEndInput1">
+                  <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
+                </div>
+                <div class="cal-dropdown" id="rangeDropdown1" hidden>
+                <div class="cal-nav">
+                  <div class="cal-nav-group">
+                    <button class="cal-nav-btn" onclick="rangeNav('rangeDropdown1','yearPrev')" title="Previous year"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 4L10.18 5.18L6.34 9L10.18 12.82L9 14L4 9L9 4ZM13 4L14.18 5.18L10.34 9L14.18 12.82L13 14L8 9L13 4Z" fill="currentColor"/></svg></button>
+                    <button class="cal-nav-btn" onclick="rangeNav('rangeDropdown1','monthPrev')" title="Previous month"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.18 5.18L8.34 9L12.18 12.82L11 14L6 9L11 4L12.18 5.18Z" fill="currentColor"/></svg></button>
+                  </div>
+                  <span class="cal-nav-title" id="rangeNavTitle1"></span>
+                  <div class="cal-nav-group">
+                    <button class="cal-nav-btn" onclick="rangeNav('rangeDropdown1','monthNext')" title="Next month"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.0002 5.18L9.8402 9L6.0002 12.82L7.1802 14L12.1802 9L7.1802 4L6.0002 5.18Z" fill="currentColor"/></svg></button>
+                    <button class="cal-nav-btn" onclick="rangeNav('rangeDropdown1','yearNext')" title="Next year"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.18 4L14.18 9L9.18 14L8 12.82L11.84 9L8 5.18L9.18 4ZM5.18 4L10.18 9L5.18 14L4 12.82L7.84 9L4 5.18L5.18 4Z" fill="currentColor"/></svg></button>
+                  </div>
+                </div>
+                <div class="cal-separator"></div>
+                <div class="cal-weekdays">
+                  <span class="cal-weekday">日</span><span class="cal-weekday">一</span><span class="cal-weekday">二</span><span class="cal-weekday">三</span><span class="cal-weekday">四</span><span class="cal-weekday">五</span><span class="cal-weekday">六</span>
+                </div>
+                <div class="cal-days" id="rangeDays1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Calendar
+  mode="range"
+  label="日期范围"
+  placeholderStart="开始日期"
+  placeholderEnd="结束日期"
+  onChange={({start, end}) =&gt; console.log(start, end)}
+/&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
         <h2 class="section-title">Month Picker</h2>
         <div class="example-block">
           <div class="example-preview" style="justify-content: flex-start; padding: 32px;">
@@ -1385,7 +1448,7 @@
           <table class="props-table">
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td><code>mode</code></td><td><code>"date" | "month" | "year"</code></td><td><code>"date"</code></td><td>Whether to pick a date, month, or year.</td></tr>
+              <tr><td><code>mode</code></td><td><code>"date" | "range" | "month" | "year"</code></td><td><code>"date"</code></td><td>Whether to pick a date, date range, month, or year.</td></tr>
               <tr><td><code>label</code></td><td><code>string</code></td><td>&mdash;</td><td>Label text displayed before the input.</td></tr>
               <tr><td><code>placeholder</code></td><td><code>string</code></td><td><code>"选择日期"</code></td><td>Placeholder text for the input.</td></tr>
               <tr><td><code>value</code></td><td><code>string</code></td><td>&mdash;</td><td>Selected date (YYYY-MM-DD), month (YYYY-MM), or year (YYYY).</td></tr>
@@ -1767,8 +1830,82 @@
     renderYearPicker(dropdownId, titleId, gridId, inputId);
   }
 
+  // Date range picker
+  const rangeState = {};
+
+  function initRangePicker(dropdownId, startInputId, endInputId, titleId, daysId) {
+    const now = new Date();
+    rangeState[dropdownId] = { year: now.getFullYear(), month: now.getMonth(), start: null, end: null, picking: 'start' };
+    renderRangePicker(dropdownId, titleId, daysId, startInputId, endInputId);
+  }
+
+  function renderRangePicker(dropdownId, titleId, daysId, startInputId, endInputId) {
+    const s = rangeState[dropdownId];
+    document.getElementById(titleId).textContent = s.year + '年 ' + (s.month + 1) + '月';
+    const firstDay = new Date(s.year, s.month, 1).getDay();
+    const daysInMonth = new Date(s.year, s.month + 1, 0).getDate();
+    const prevDays = new Date(s.year, s.month, 0).getDate();
+    const daysEl = document.getElementById(daysId);
+
+    let html = '';
+    for (let i = firstDay - 1; i >= 0; i--) {
+      html += '<button class="cal-day other-month" data-date="">' + (prevDays - i) + '</button>';
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = s.year + '-' + String(s.month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      let cls = '';
+      if (s.start === dateStr && s.end === dateStr) cls = ' range-start range-end';
+      else if (s.start === dateStr) cls = ' range-start';
+      else if (s.end === dateStr) cls = ' range-end';
+      else if (s.start && s.end && dateStr > s.start && dateStr < s.end) cls = ' in-range';
+      html += '<button class="cal-day' + cls + '" data-date="' + dateStr + '">' + d + '</button>';
+    }
+    const totalCells = firstDay + daysInMonth;
+    const remaining = (7 - (totalCells % 7)) % 7;
+    for (let i = 1; i <= remaining; i++) {
+      html += '<button class="cal-day other-month" data-date="">' + i + '</button>';
+    }
+    daysEl.innerHTML = html;
+
+    daysEl.querySelectorAll('.cal-day').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const d = this.dataset.date;
+        if (!d) return;
+        if (s.picking === 'start') {
+          s.start = d;
+          s.end = null;
+          s.picking = 'end';
+          document.getElementById(startInputId).value = d;
+          document.getElementById(endInputId).value = '';
+        } else {
+          if (d < s.start) {
+            s.end = s.start;
+            s.start = d;
+            document.getElementById(startInputId).value = d;
+            document.getElementById(endInputId).value = s.end;
+          } else {
+            s.end = d;
+            document.getElementById(endInputId).value = d;
+          }
+          s.picking = 'start';
+          document.getElementById(dropdownId).hidden = true;
+        }
+        renderRangePicker(dropdownId, titleId, daysId, startInputId, endInputId);
+      });
+    });
+  }
+
+  function rangeNav(dropdownId, action) {
+    const s = rangeState[dropdownId];
+    if (action === 'yearPrev') s.year--;
+    else if (action === 'yearNext') s.year++;
+    else if (action === 'monthPrev') { s.month--; if (s.month < 0) { s.month = 11; s.year--; } }
+    else if (action === 'monthNext') { s.month++; if (s.month > 11) { s.month = 0; s.year++; } }
+    renderRangePicker(dropdownId, 'rangeNavTitle1', 'rangeDays1', 'rangeStartInput1', 'rangeEndInput1');
+  }
+
   // Toggle dropdowns on input click
-  const allDropdowns = ['dateDropdown1', 'monthDropdown1', 'yearDropdown1'];
+  const allDropdowns = ['dateDropdown1', 'rangeDropdown1', 'monthDropdown1', 'yearDropdown1'];
 
   function closeOtherDropdowns(except) {
     allDropdowns.forEach(id => { if (id !== except) document.getElementById(id).hidden = true; });
@@ -1778,6 +1915,18 @@
     const dd = document.getElementById('dateDropdown1');
     dd.hidden = !dd.hidden;
     closeOtherDropdowns('dateDropdown1');
+  });
+
+  document.getElementById('rangeStartInput1').addEventListener('click', function() {
+    const dd = document.getElementById('rangeDropdown1');
+    dd.hidden = !dd.hidden;
+    closeOtherDropdowns('rangeDropdown1');
+  });
+
+  document.getElementById('rangeEndInput1').addEventListener('click', function() {
+    const dd = document.getElementById('rangeDropdown1');
+    dd.hidden = !dd.hidden;
+    closeOtherDropdowns('rangeDropdown1');
   });
 
   document.getElementById('monthInput1').addEventListener('click', function() {
@@ -1795,11 +1944,13 @@
   // Close dropdowns on outside click
   document.addEventListener('click', function(e) {
     if (!e.target.closest('#datePicker1')) document.getElementById('dateDropdown1').hidden = true;
+    if (!e.target.closest('#rangePicker1')) document.getElementById('rangeDropdown1').hidden = true;
     if (!e.target.closest('#monthPicker1')) document.getElementById('monthDropdown1').hidden = true;
     if (!e.target.closest('#yearPicker1')) document.getElementById('yearDropdown1').hidden = true;
   });
 
   initDatePicker('dateDropdown1', 'dateInput1', 'dateNavTitle1', 'dateDays1');
+  initRangePicker('rangeDropdown1', 'rangeStartInput1', 'rangeEndInput1', 'rangeNavTitle1', 'rangeDays1');
   initMonthPicker('monthDropdown1', 'monthInput1', 'monthNavTitle1', 'monthGrid1');
   initYearPicker('yearDropdown1', 'yearInput1', 'yearNavTitle1', 'yearGrid1');
 
