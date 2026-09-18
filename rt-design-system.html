@@ -664,6 +664,58 @@
   .cal-input:focus:not(:disabled) { border-color: var(--primary); }
   .cal-input:disabled { opacity: 0.5; cursor: not-allowed; }
 
+  /* Input component */
+  .input-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+  .input-field {
+    width: 250px;
+    height: 30px;
+    background: #2B2F36;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: var(--fg);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .input-field::placeholder { color: var(--fg-muted); }
+  .input-field:hover:not(:disabled) { border-color: var(--primary); }
+  .input-field:focus:not(:disabled) { border-color: var(--primary); }
+  .input-field:disabled { opacity: 0.5; cursor: not-allowed; }
+  .input-field.input-error { border-color: var(--error); }
+  .input-field.input-error:focus { border-color: var(--error); }
+  .input-label {
+    font-size: 14px;
+    color: var(--fg);
+    margin-right: 10px;
+    white-space: nowrap;
+  }
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+  .input-state-label {
+    font-size: 12px;
+    color: var(--fg-muted);
+    margin-top: 6px;
+  }
+  .input-demo-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .cal-icon {
     position: absolute;
     right: 8px;
@@ -979,6 +1031,7 @@
       <div class="nav-group-title">Components</div>
       <a class="nav-link" onclick="showPage('button', this)">Button</a>
       <a class="nav-link" onclick="showPage('calendar', this)">Calendar</a>
+      <a class="nav-link" onclick="showPage('input', this)">Input</a>
     </div>
     <div class="nav-group">
       <div class="nav-group-title">Tokens</div>
@@ -1548,6 +1601,138 @@
       </div>
     </div>
 
+    <!-- INPUT -->
+    <div id="page-input" class="page-section">
+      <div class="page-header">
+        <h1 class="page-title">Input</h1>
+        <p class="page-desc">Text input field for capturing user data. Supports labels, placeholder text, and multiple interaction states.</p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">States</h2>
+        <div class="example-block">
+          <div class="example-preview">
+            <div class="input-row">
+              <div class="input-demo-col">
+                <div class="input-group">
+                  <span class="input-label">Label</span>
+                  <input class="input-field" type="text" placeholder="Placeholder">
+                </div>
+                <span class="input-state-label">Default</span>
+              </div>
+              <div class="input-demo-col">
+                <div class="input-group">
+                  <span class="input-label">Label</span>
+                  <input class="input-field" type="text" placeholder="Placeholder" style="border-color: var(--primary);">
+                </div>
+                <span class="input-state-label">Hover</span>
+              </div>
+              <div class="input-demo-col">
+                <div class="input-group">
+                  <span class="input-label">Label</span>
+                  <input class="input-field" type="text" placeholder="Placeholder" style="border-color: var(--primary);">
+                </div>
+                <span class="input-state-label">Focus</span>
+              </div>
+            </div>
+            <div class="input-row" style="margin-top: 20px;">
+              <div class="input-demo-col">
+                <div class="input-group">
+                  <span class="input-label">Label</span>
+                  <input class="input-field" type="text" value="Input text">
+                </div>
+                <span class="input-state-label">Filled</span>
+              </div>
+              <div class="input-demo-col">
+                <div class="input-group">
+                  <span class="input-label">Label</span>
+                  <input class="input-field input-error" type="text" value="Invalid input">
+                </div>
+                <span class="input-state-label">Error</span>
+              </div>
+              <div class="input-demo-col">
+                <div class="input-group">
+                  <span class="input-label">Label</span>
+                  <input class="input-field" type="text" value="Disabled text" disabled>
+                </div>
+                <span class="input-state-label">Disabled</span>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Input label="Label" placeholder="Placeholder" /&gt;
+&lt;Input label="Label" value="Input text" /&gt;
+&lt;Input label="Label" value="Invalid input" error /&gt;
+&lt;Input label="Label" value="Disabled text" disabled /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Without Label</h2>
+        <div class="example-block">
+          <div class="example-preview">
+            <div class="input-row">
+              <div class="input-demo-col">
+                <input class="input-field" type="text" placeholder="Placeholder">
+                <span class="input-state-label">Default</span>
+              </div>
+              <div class="input-demo-col">
+                <input class="input-field" type="text" value="Input text">
+                <span class="input-state-label">Filled</span>
+              </div>
+              <div class="input-demo-col">
+                <input class="input-field" type="text" value="Disabled text" disabled>
+                <span class="input-state-label">Disabled</span>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Input placeholder="Placeholder" /&gt;
+&lt;Input value="Input text" /&gt;
+&lt;Input value="Disabled text" disabled /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Design Tokens</h2>
+        <div style="overflow-x:auto">
+          <table class="props-table">
+            <thead><tr><th>Token</th><th>Value</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>background</code></td><td><code>#2B2F36</code></td><td>Input background color</td></tr>
+              <tr><td><code>border-radius</code></td><td><code>2px</code></td><td>Corner radius</td></tr>
+              <tr><td><code>border-default</code></td><td><code>transparent</code></td><td>Default border (invisible)</td></tr>
+              <tr><td><code>border-hover</code></td><td><code>var(--primary) / #3B9B4D</code></td><td>Border on hover</td></tr>
+              <tr><td><code>border-focus</code></td><td><code>var(--primary) / #3B9B4D</code></td><td>Border on focus</td></tr>
+              <tr><td><code>border-error</code></td><td><code>var(--error)</code></td><td>Border on error state</td></tr>
+              <tr><td><code>text-color</code></td><td><code>#DCE0F2</code></td><td>Input text color</td></tr>
+              <tr><td><code>placeholder-color</code></td><td><code>#7B808E</code></td><td>Placeholder text color</td></tr>
+              <tr><td><code>font-size</code></td><td><code>14px</code></td><td>Input text size</td></tr>
+              <tr><td><code>height</code></td><td><code>30px</code></td><td>Input field height</td></tr>
+              <tr><td><code>width</code></td><td><code>250px</code></td><td>Default input width</td></tr>
+              <tr><td><code>padding</code></td><td><code>0 10px</code></td><td>Inner horizontal padding</td></tr>
+              <tr><td><code>disabled-opacity</code></td><td><code>0.5</code></td><td>Opacity when disabled</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">API Reference</h2>
+        <div style="overflow-x:auto">
+          <table class="props-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>label</code></td><td><code>string</code></td><td>&mdash;</td><td>Label text displayed to the left of the input.</td></tr>
+              <tr><td><code>placeholder</code></td><td><code>string</code></td><td>&mdash;</td><td>Placeholder text shown when value is empty.</td></tr>
+              <tr><td><code>value</code></td><td><code>string</code></td><td>&mdash;</td><td>The current input value.</td></tr>
+              <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether the input is disabled.</td></tr>
+              <tr><td><code>error</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether to show error state styling.</td></tr>
+              <tr><td><code>onChange</code></td><td><code>(value: string) =&gt; void</code></td><td>&mdash;</td><td>Callback when value changes.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     <!-- ALL TOKENS -->
     <div id="page-tokens" class="page-section">
       <div class="page-header">
@@ -1697,8 +1882,8 @@
   const searchIndex = [];
   function buildSearchIndex() {
     const pages = document.querySelectorAll('.page-section');
-    const pageNames = { 'page-colors': 'Colors', 'page-typography': 'Typography', 'page-spacing': 'Spacing', 'page-button': 'Button', 'page-calendar': 'Calendar', 'page-tokens': 'All Tokens' };
-    const pageIds = { 'page-colors': 'colors', 'page-typography': 'typography', 'page-spacing': 'spacing', 'page-button': 'button', 'page-calendar': 'calendar', 'page-tokens': 'tokens' };
+    const pageNames = { 'page-colors': 'Colors', 'page-typography': 'Typography', 'page-spacing': 'Spacing', 'page-button': 'Button', 'page-calendar': 'Calendar', 'page-input': 'Input', 'page-tokens': 'All Tokens' };
+    const pageIds = { 'page-colors': 'colors', 'page-typography': 'typography', 'page-spacing': 'spacing', 'page-button': 'button', 'page-calendar': 'calendar', 'page-input': 'input', 'page-tokens': 'tokens' };
     pages.forEach(page => {
       const pid = page.id;
       const pname = pageNames[pid] || pid;
