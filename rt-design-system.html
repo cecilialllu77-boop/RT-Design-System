@@ -736,6 +736,32 @@
     margin-top: 5px;
     font-family: var(--font-sans);
   }
+  .input-field-sm {
+    width: 250px;
+    height: 22px;
+    background: #2B2F36;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 0 10px;
+    font-size: 12px;
+    font-family: var(--font-sans);
+    color: var(--fg);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .input-field-sm::placeholder { color: var(--fg-muted); }
+  .input-field-sm:hover:not(:disabled) { border-color: var(--primary); }
+  .input-field-sm:focus:not(:disabled) { border-color: var(--primary); }
+  .input-field-sm:disabled { opacity: 0.5; cursor: not-allowed; }
+  .input-field-sm.input-error { border-color: var(--error); }
+  .input-field-sm.input-error:focus { border-color: var(--error); }
+  .input-label-sm {
+    font-size: 14px;
+    color: var(--fg);
+    margin-right: 10px;
+    white-space: nowrap;
+    line-height: 22px;
+  }
 
   .cal-icon {
     position: absolute;
@@ -1653,6 +1679,29 @@
       </div>
 
       <div class="section">
+        <h2 class="section-title">Small Size</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="input-group">
+              <span class="input-label-sm">姓名</span>
+              <input class="input-field-sm" type="text" placeholder="请输入姓名">
+            </div>
+            <div class="input-group">
+              <span class="input-label-sm">邮箱</span>
+              <input class="input-field-sm" type="text" placeholder="请输入邮箱">
+            </div>
+            <div class="input-group">
+              <span class="input-label-sm">备注</span>
+              <input class="input-field-sm" type="text" placeholder="请输入备注" style="width: 350px;">
+            </div>
+          </div>
+          <div class="example-code">&lt;Input label="姓名" placeholder="请输入姓名" size="small" /&gt;
+&lt;Input label="邮箱" placeholder="请输入邮箱" size="small" /&gt;
+&lt;Input label="备注" placeholder="请输入备注" size="small" width={350} /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
         <h2 class="section-title">Vertical Layout</h2>
         <div class="example-block">
           <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
@@ -1731,8 +1780,10 @@
               <tr><td><code>border-error</code></td><td><code>var(--error)</code></td><td>Border on error state</td></tr>
               <tr><td><code>text-color</code></td><td><code>#DCE0F2</code></td><td>Input text color</td></tr>
               <tr><td><code>placeholder-color</code></td><td><code>#7B808E</code></td><td>Placeholder text color</td></tr>
-              <tr><td><code>font-size</code></td><td><code>14px</code></td><td>Input text size</td></tr>
-              <tr><td><code>height</code></td><td><code>30px</code></td><td>Input field height</td></tr>
+              <tr><td><code>font-size</code></td><td><code>14px</code></td><td>Input text size (default)</td></tr>
+              <tr><td><code>font-size-sm</code></td><td><code>12px</code></td><td>Input text size (small)</td></tr>
+              <tr><td><code>height</code></td><td><code>30px</code></td><td>Input field height (default)</td></tr>
+              <tr><td><code>height-sm</code></td><td><code>22px</code></td><td>Input field height (small)</td></tr>
               <tr><td><code>width</code></td><td><code>250px</code></td><td>Default input width</td></tr>
               <tr><td><code>padding</code></td><td><code>0 10px</code></td><td>Inner horizontal padding</td></tr>
               <tr><td><code>disabled-opacity</code></td><td><code>0.5</code></td><td>Opacity when disabled</td></tr>
@@ -1747,6 +1798,7 @@
           <table class="props-table">
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
             <tbody>
+              <tr><td><code>size</code></td><td><code>"default" | "small"</code></td><td><code>"default"</code></td><td>Input size. "small" uses 22px height and 12px font.</td></tr>
               <tr><td><code>label</code></td><td><code>string</code></td><td>&mdash;</td><td>Label text displayed to the left of the input.</td></tr>
               <tr><td><code>placeholder</code></td><td><code>string</code></td><td>&mdash;</td><td>Placeholder text shown when value is empty.</td></tr>
               <tr><td><code>value</code></td><td><code>string</code></td><td>&mdash;</td><td>The current input value.</td></tr>
