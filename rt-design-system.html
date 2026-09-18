@@ -1,0 +1,2369 @@
+<title>RT Design System</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #0F1215;
+    --bg-elevated: #161A1D;
+    --bg-surface: #1E2228;
+    --bg-surface-2: #23262B;
+    --bg-surface-3: #2B2F36;
+    --fg: #DCE0F2;
+    --fg-title: #CFCFCF;
+    --fg-muted: #7B808E;
+    --fg-faint: #949393;
+    --border: #2B2F36;
+    --border-subtle: #23262B;
+    --primary: #3B9B4D;
+    --primary-50: rgba(59, 155, 77, 0.5);
+    --primary-10: rgba(59, 155, 77, 0.1);
+    --warning: #FFC232;
+    --error: #E36732;
+    --info: #4C8BF5;
+    --btn-gray: #5A5D69;
+    --btn-gray-2: #7B808E;
+    --btn-icon: #B3B9CC;
+    --sidebar-w: 240px;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--fg);
+    font-size: 14px;
+    line-height: 1.6;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: var(--bg-surface-2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-header {
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sidebar-logo {
+    width: 32px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sidebar-logo svg { width: 32px; height: 20px; }
+
+  .sidebar-brand {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fg);
+    line-height: 1.2;
+  }
+
+  .sidebar-brand span {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--fg-muted);
+    margin-top: 1px;
+  }
+
+  .sidebar-nav { padding: 12px 0; flex: 1; }
+
+  .nav-group { margin-bottom: 20px; }
+
+  .nav-group-title {
+    padding: 6px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--fg-faint);
+  }
+
+  .nav-link {
+    display: block;
+    padding: 6px 20px;
+    font-size: 13px;
+    color: var(--fg-muted);
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+    cursor: pointer;
+  }
+
+  .nav-link:hover { color: var(--fg); background: var(--bg-surface-3); }
+  .nav-link.active { color: var(--primary); background: var(--primary-10); }
+
+  /* Main content */
+  .main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+  }
+
+  .topbar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 50;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 40px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(8px);
+  }
+
+  .search-container {
+    flex: 1;
+    max-width: 480px;
+    position: relative;
+  }
+
+  .search-input {
+    width: 100%;
+    height: 32px;
+    background: var(--bg-surface-3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0 12px 0 34px;
+    font-size: 13px;
+    font-family: var(--font-sans);
+    color: var(--fg);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .search-input::placeholder { color: var(--fg-muted); }
+  .search-input:focus { border-color: var(--primary); }
+
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: var(--fg-muted);
+    pointer-events: none;
+  }
+
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    background: var(--bg-surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    max-height: 360px;
+    overflow-y: auto;
+    z-index: 200;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  }
+
+  .search-results[hidden] { display: none !important; }
+
+  .search-result-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+  }
+
+  .search-result-item:last-child { border-bottom: none; }
+  .search-result-item:hover { background: var(--bg-surface-3); }
+
+  .search-result-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 2px;
+  }
+
+  .search-result-page {
+    font-size: 11px;
+    color: var(--primary);
+    margin-bottom: 2px;
+  }
+
+  .search-result-snippet {
+    font-size: 11px;
+    color: var(--fg-muted);
+    line-height: 1.4;
+  }
+
+  .search-result-snippet mark {
+    background: var(--primary-50);
+    color: var(--fg);
+    border-radius: 2px;
+    padding: 0 2px;
+  }
+
+  .search-no-results {
+    padding: 16px 14px;
+    font-size: 13px;
+    color: var(--fg-muted);
+    text-align: center;
+  }
+
+  .content {
+    padding: 40px;
+    max-width: 960px;
+  }
+
+  /* Page sections */
+  .page-section { display: none; }
+  .page-section.active { display: block; }
+
+  .page-header { margin-bottom: 36px; }
+
+  .page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .page-desc {
+    font-size: 14px;
+    color: var(--fg-muted);
+    max-width: 600px;
+    line-height: 1.6;
+  }
+
+  /* Sections */
+  .section { margin-bottom: 40px; }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .section-desc {
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .subsection-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fg-title);
+    margin-bottom: 12px;
+    margin-top: 24px;
+  }
+
+  .subsection-title:first-of-type { margin-top: 0; }
+
+  /* Color swatches */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .color-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .color-swatch { height: 72px; }
+
+  .color-info { padding: 10px 12px; }
+
+  .color-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--fg);
+    margin-bottom: 2px;
+  }
+
+  .color-value {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+  }
+
+  .color-token {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-faint);
+    margin-top: 1px;
+  }
+
+  .color-desc {
+    font-size: 11px;
+    color: var(--fg-faint);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+
+  /* Typography scale */
+  .type-table {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .type-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .type-row:last-child { border-bottom: none; }
+
+  .type-label {
+    width: 44px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+    flex-shrink: 0;
+  }
+
+  .type-sample { flex: 1; }
+
+  .type-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .type-meta-line {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+    display: block;
+  }
+
+  .type-color-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+
+  /* Font family */
+  .font-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .font-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+
+  .font-card-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+
+  .font-card-sample {
+    font-size: 13px;
+    color: var(--fg-muted);
+    line-height: 1.8;
+  }
+
+  /* Spacing */
+  .spacing-table {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .spacing-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .spacing-row:last-child { border-bottom: none; }
+
+  .spacing-label {
+    width: 28px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-muted);
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .spacing-bar-container { flex: 1; }
+
+  .spacing-bar {
+    height: 10px;
+    background: var(--primary-10);
+    border-radius: 3px;
+    border: 1px solid rgba(59, 155, 77, 0.2);
+  }
+
+  .spacing-val {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--fg-muted);
+    flex-shrink: 0;
+    width: 36px;
+    text-align: right;
+  }
+
+  /* Buttons */
+  .button-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+    min-width: 90px;
+    height: 30px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+  .btn-primary { background: #3B9B4D; color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: #4EB962; }
+  .btn-primary:active:not(:disabled) { background: #2E8740; }
+  .btn-secondary { background: #5A5D69; color: #fff; }
+  .btn-secondary:hover:not(:disabled) { background: #7B7F8E; }
+  .btn-secondary:active:not(:disabled) { background: #3E4048; }
+  .btn-disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-disabled:hover { opacity: 0.5; }
+
+  .example-block {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: visible;
+    margin-bottom: 16px;
+  }
+
+  .example-preview {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .code-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 8px 16px;
+    border: none;
+    border-top: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--fg-muted);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .code-toggle:hover { color: var(--fg); }
+  .code-toggle .toggle-icon {
+    display: inline-block;
+    transition: transform 0.2s;
+    font-size: 10px;
+  }
+  .code-toggle.expanded .toggle-icon { transform: rotate(90deg); }
+  .code-toggle:not(.expanded) + .example-code { display: none; }
+  .code-toggle:not(.expanded) { border-radius: 0 0 8px 8px; }
+
+  .example-code {
+    border-top: 1px solid var(--border);
+    border-radius: 0 0 8px 8px;
+    padding: 12px 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-muted);
+    background: var(--bg-elevated);
+    white-space: pre;
+    overflow-x: auto;
+  }
+
+  /* Props table */
+  .props-table {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .props-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-faint);
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .props-table td {
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--fg);
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .props-table tr:last-child td { border-bottom: none; }
+
+  .props-table code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: var(--bg-surface-3);
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--primary);
+  }
+
+  /* Token table */
+  .token-table {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  .token-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-faint);
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .token-table td {
+    padding: 10px 14px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+
+  .token-table tr:last-child td { border-bottom: none; }
+
+  .token-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .token-name { color: var(--fg); font-weight: 500; }
+  .token-var { font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); }
+  .token-hex { font-family: var(--font-mono); font-size: 12px; color: var(--fg); }
+  .token-desc { font-size: 12px; color: var(--fg-muted); }
+
+  /* Calendar */
+  .cal-field {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+
+  .cal-label {
+    font-size: 14px;
+    color: #CFCFCF;
+    white-space: nowrap;
+  }
+
+  .cal-input-wrap {
+    position: relative;
+    width: 250px;
+    height: 30px;
+  }
+
+  .cal-input {
+    width: 100%;
+    height: 100%;
+    background: #2B2F36;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 0 32px 0 10px;
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: var(--fg);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .cal-input::placeholder { color: var(--fg-muted); }
+  .cal-input:hover:not(:disabled) { border-color: var(--primary); }
+  .cal-input:focus:not(:disabled) { border-color: var(--primary); }
+  .cal-input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Input component */
+  .input-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+  .input-field {
+    width: 250px;
+    height: 30px;
+    background: #2B2F36;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: var(--fg);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .input-field::placeholder { color: var(--fg-muted); }
+  .input-field:hover:not(:disabled) { border-color: var(--primary); }
+  .input-field:focus:not(:disabled) { border-color: var(--primary); }
+  .input-field:disabled { opacity: 0.5; cursor: not-allowed; }
+  .input-field.input-error { border-color: var(--error); }
+  .input-field.input-error:focus { border-color: var(--error); }
+  .input-label {
+    font-size: 14px;
+    color: var(--fg);
+    margin-right: 10px;
+    white-space: nowrap;
+    line-height: 30px;
+  }
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .input-group {
+    display: flex;
+    align-items: flex-start;
+  }
+  .input-state-label {
+    font-size: 12px;
+    color: var(--fg-muted);
+    margin-top: 6px;
+  }
+  .input-demo-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .input-group-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .input-group-vertical .input-label {
+    margin-right: 0;
+    margin-bottom: 8px;
+    line-height: normal;
+  }
+  .input-error-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .input-error-msg {
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 5px;
+    font-family: var(--font-sans);
+  }
+  .input-field-sm {
+    width: 250px;
+    height: 22px;
+    background: #2B2F36;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    padding: 0 10px;
+    font-size: 12px;
+    font-family: var(--font-sans);
+    color: var(--fg);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .input-field-sm::placeholder { color: var(--fg-muted); }
+  .input-field-sm:hover:not(:disabled) { border-color: var(--primary); }
+  .input-field-sm:focus:not(:disabled) { border-color: var(--primary); }
+  .input-field-sm:disabled { opacity: 0.5; cursor: not-allowed; }
+  .input-field-sm.input-error { border-color: var(--error); }
+  .input-field-sm.input-error:focus { border-color: var(--error); }
+  .input-label-sm {
+    font-size: 14px;
+    color: var(--fg);
+    margin-right: 10px;
+    white-space: nowrap;
+    line-height: 22px;
+  }
+
+  .cal-icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: #7B808E;
+    pointer-events: none;
+  }
+
+  .cal-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    width: 252px;
+    background: #2B2F36;
+    border-radius: 2px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
+    z-index: 300;
+    padding: 10px 0;
+    user-select: none;
+  }
+
+  .cal-dropdown[hidden] { display: none !important; }
+
+  .cal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    height: 30px;
+    padding: 0 15px;
+    margin-bottom: 0;
+  }
+
+  .cal-nav-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cal-separator {
+    height: 1px;
+    background: #3A3E47;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .cal-nav-btn {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #7B808E;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    border-radius: 2px;
+    transition: color 0.15s;
+  }
+
+  .cal-nav-btn:hover { color: var(--fg); }
+
+  .cal-nav-title {
+    font-size: 14px;
+    color: var(--fg);
+    font-weight: 400;
+    min-width: 80px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .cal-weekdays {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    padding: 0 15px;
+  }
+
+  .cal-weekday {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #CFCFCF;
+  }
+
+  .cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 30px);
+    gap: 2px;
+    justify-content: center;
+    padding: 0 15px;
+  }
+
+  .cal-range-panel .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    padding: 0 15px;
+  }
+
+  .cal-range-panel .cal-weekday {
+    width: auto;
+  }
+
+  .cal-range-panel .cal-days {
+    row-gap: 2px;
+    column-gap: 0;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .cal-range-panel .cal-day {
+    width: auto;
+    height: 30px;
+  }
+
+  .cal-day {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #DCE0F2;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.1s;
+    border: none;
+    background: none;
+    font-family: var(--font-sans);
+    padding: 0;
+  }
+
+  .cal-day:hover { background: rgba(59,155,77,0.1); color: #fff; }
+  .cal-day.other-month { color: #949393; }
+  .cal-day.other-month:hover { color: #949393; background: none; cursor: default; }
+  .cal-day.selected { background: rgba(59,155,77,0.5); color: #fff; }
+  .cal-day.selected:hover { background: rgba(59,155,77,0.5); }
+  .cal-day.range-start { background: rgba(59,155,77,0.5); color: #fff; border-radius: 2px 0 0 2px; }
+  .cal-day.range-end { background: rgba(59,155,77,0.5); color: #fff; border-radius: 0 2px 2px 0; }
+  .cal-day.range-start.range-end { border-radius: 2px; }
+  .cal-day.in-range { background: rgba(59,155,77,0.15); color: #fff; border-radius: 0; }
+  .cal-day.in-range:hover { background: rgba(59,155,77,0.3); }
+  .cal-day.hover-in-range { background: rgba(59,155,77,0.15); color: #fff; border-radius: 0; }
+  .cal-day.hover-range-end { background: rgba(59,155,77,0.5); color: #fff; }
+
+  .cal-range-inputs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cal-range-separator {
+    color: var(--fg-muted);
+    font-size: 14px;
+  }
+
+  .cal-range-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    width: 504px;
+    background: #2B2F36;
+    border-radius: 2px;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
+    z-index: 300;
+    padding: 10px 0;
+    user-select: none;
+    display: flex;
+  }
+
+  .cal-range-dropdown[hidden] { display: none !important; }
+
+  .cal-range-panel {
+    width: 252px;
+    flex-shrink: 0;
+  }
+
+  .cal-range-panel:first-child {
+    border-right: 1px solid #3A3E47;
+  }
+
+  .cal-months {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    padding: 0 15px;
+    justify-items: center;
+  }
+
+  .cal-month-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: #DCE0F2;
+    background: none;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.1s;
+    padding: 0;
+  }
+
+  .cal-month-btn:hover { background: rgba(59,155,77,0.1); color: #fff; }
+  .cal-month-btn.selected { background: rgba(59,155,77,0.5); color: #fff; }
+
+  .cal-years {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    padding: 0 15px;
+    justify-items: center;
+  }
+
+  .cal-year-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: #DCE0F2;
+    background: none;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.1s;
+    padding: 0;
+  }
+
+  .cal-year-btn:hover { background: rgba(59,155,77,0.1); color: #fff; }
+  .cal-year-btn.selected { background: rgba(59,155,77,0.5); color: #fff; }
+
+  /* Mobile hamburger */
+  .hamburger {
+    display: none;
+    position: fixed;
+    top: 10px;
+    left: 12px;
+    z-index: 200;
+    width: 36px;
+    height: 36px;
+    background: var(--bg-surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger svg { width: 18px; height: 18px; color: var(--fg); }
+
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+  }
+
+  @media (max-width: 720px) {
+    .sidebar { transform: translateX(-100%); transition: transform 0.2s; }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-overlay.open { display: block; }
+    .hamburger { display: flex; }
+    .main { margin-left: 0; }
+    .topbar { padding: 0 16px 0 56px; }
+    .content { padding: 24px 16px; }
+    .font-grid { grid-template-columns: 1fr; }
+    .color-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .color-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+<button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+</button>
+<div class="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo"><svg width="32" height="20" viewBox="0 0 63 40" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.7841 36.5372C22.8806 36.6974 23.9771 36.9172 25.083 36.9996C29.4644 37.3201 33.0619 35.6398 36.1508 32.7278C37.8212 31.1528 39.5243 29.6006 41.0921 27.9295C41.9273 27.0366 42.5059 27.0504 43.5277 27.6639C47.8251 30.2325 53.233 29.097 56.0046 25.1503C58.7482 21.2493 57.9224 15.8878 54.1149 12.8935C50.4427 10.0135 45.2215 10.3157 41.7593 13.681C36.2861 18.9967 30.8548 24.3582 25.3909 29.6876C20.5103 34.4448 13.9779 35.6489 8.18736 32.888C1.84625 29.8616 -1.34996 22.9709 0.539771 16.1076C2.16354 10.215 8.36467 5.21978 15.275 5.81499C15.9236 5.86994 16.6562 5.728 17.1974 5.9844C19.4184 7.05121 20.7109 5.89741 22.1621 4.42311C27.1267 -0.622468 34.5083 -1.40998 40.1262 2.36276C40.4668 2.59168 40.7701 2.87556 41.3627 3.35173C40.7048 3.35173 40.3642 3.41125 40.0562 3.34257C35.4042 2.37191 31.2654 3.42498 27.7286 6.4972C25.6709 8.28742 23.7392 10.2104 21.8214 12.138C21.0655 12.898 20.529 13.0812 19.5211 12.4448C15.4103 9.86244 10.1331 10.8056 7.23083 14.5234C4.3799 18.1817 4.76251 23.4699 8.10337 26.5238C11.7895 29.8982 17.2021 30.0722 20.8369 26.652C26.4688 21.3455 31.9467 15.8741 37.4619 10.4485C42.5945 5.39834 49.5142 4.24455 55.4914 7.49533C60.6146 10.2791 63.5776 15.984 62.9057 21.7621C62.2571 27.2885 57.871 32.2196 52.2998 33.7534C49.7942 34.4448 47.3025 34.4631 44.8202 33.7763C43.593 33.4375 42.7205 33.6389 41.834 34.6233C38.9784 37.7825 35.5115 39.8246 31.0648 39.9894C27.5046 40.1222 24.4251 39.0096 21.7841 36.5372Z" fill="url(#paint0_linear_logo)"/><defs><linearGradient id="paint0_linear_logo" x1="31.5" y1="0" x2="31.5" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#97E4AA"/><stop offset="1" stop-color="#3B9B4D"/></linearGradient></defs></svg></div>
+    <div class="sidebar-brand">
+      RT Design System
+      <span>Radiotherapy Cloud</span>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-group">
+      <div class="nav-group-title">Foundation</div>
+      <a class="nav-link active" onclick="showPage('colors', this)">Colors</a>
+      <a class="nav-link" onclick="showPage('typography', this)">Typography</a>
+      <a class="nav-link" onclick="showPage('spacing', this)">Spacing</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title">Components</div>
+      <a class="nav-link" onclick="showPage('button', this)">Button</a>
+      <a class="nav-link" onclick="showPage('calendar', this)">Calendar</a>
+      <a class="nav-link" onclick="showPage('input', this)">Input</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-group-title">Tokens</div>
+      <a class="nav-link" onclick="showPage('tokens', this)">All Tokens</a>
+    </div>
+  </nav>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="search-container">
+      <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input class="search-input" type="text" placeholder="Search colors, tokens, components..." id="searchInput" autocomplete="off">
+      <div class="search-results" id="searchResults" hidden></div>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- COLORS -->
+    <div id="page-colors" class="page-section active">
+      <div class="page-header">
+        <h1 class="page-title">Colors</h1>
+        <p class="page-desc">The color system is composed of primary colors, extended palettes, and semantic alert colors for the Radiotherapy Cloud platform.</p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">1. Primary Palette</h2>
+        <p class="section-desc">Our primary palette consists of dark, white, and green. We use green (#3B9B4D) as the main action color for buttons, labels, and key interactions.</p>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background:#3B9B4D"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Green</div>
+              <div class="color-value">#3B9B4D</div>
+              <div class="color-token">--primary</div>
+              <div class="color-desc">Main buttons, labels, product positioning</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#FFFFFF; border-bottom: 1px solid var(--border)"></div>
+            <div class="color-info">
+              <div class="color-name">White</div>
+              <div class="color-value">#FFFFFF</div>
+              <div class="color-token">--white</div>
+              <div class="color-desc">Modal titles, button text color</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#161A1D"></div>
+            <div class="color-info">
+              <div class="color-name">Dark</div>
+              <div class="color-value">#161A1D</div>
+              <div class="color-token">--dark</div>
+              <div class="color-desc">Main background board color</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">2. Extended Palette</h2>
+        <p class="section-desc">Extended colors built on the primary palette, providing options for states, interactions, text, and backgrounds.</p>
+
+        <h3 class="subsection-title">Green Extended</h3>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background:rgba(59,155,77,0.5)"></div>
+            <div class="color-info">
+              <div class="color-name">Primary Green 50%</div>
+              <div class="color-value">rgba(59, 155, 77, 0.5)</div>
+              <div class="color-token">--primary-50</div>
+              <div class="color-desc">Table mouse-down and button selected state</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">Text Colors</h3>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background:#CFCFCF"></div>
+            <div class="color-info">
+              <div class="color-name">Title Text</div>
+              <div class="color-value">#CFCFCF</div>
+              <div class="color-token">--text-title</div>
+              <div class="color-desc">Title text color</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#DCE0F2"></div>
+            <div class="color-info">
+              <div class="color-name">Content Text</div>
+              <div class="color-value">#DCE0F2</div>
+              <div class="color-token">--text-content</div>
+              <div class="color-desc">Main content text color</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#7B808E"></div>
+            <div class="color-info">
+              <div class="color-name">Placeholder Text</div>
+              <div class="color-value">#7B808E</div>
+              <div class="color-token">--text-placeholder</div>
+              <div class="color-desc">Placeholder / fill text color</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#949393"></div>
+            <div class="color-info">
+              <div class="color-name">Readonly Text</div>
+              <div class="color-value">#949393</div>
+              <div class="color-token">--text-readonly</div>
+              <div class="color-desc">Read-only button text color</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">Background Colors</h3>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background:#1E2228"></div>
+            <div class="color-info">
+              <div class="color-name">Top Section</div>
+              <div class="color-value">#1E2228</div>
+              <div class="color-token">--bg-top</div>
+              <div class="color-desc">Top section area background</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#23262B"></div>
+            <div class="color-info">
+              <div class="color-name">Sidebar</div>
+              <div class="color-value">#23262B</div>
+              <div class="color-token">--bg-sidebar</div>
+              <div class="color-desc">Left sidebar background</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#2B2F36"></div>
+            <div class="color-info">
+              <div class="color-name">Surface</div>
+              <div class="color-value">#2B2F36</div>
+              <div class="color-token">--bg-surface</div>
+              <div class="color-desc">Top bar, input, icon button, editable table background</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="subsection-title">Other Colors</h3>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background:#5A5D69"></div>
+            <div class="color-info">
+              <div class="color-name">Gray Button Primary</div>
+              <div class="color-value">#5A5D69</div>
+              <div class="color-token">--btn-gray-primary</div>
+              <div class="color-desc">Gray button (white text)</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#B3B9CC"></div>
+            <div class="color-info">
+              <div class="color-name">Button Icon</div>
+              <div class="color-value">#B3B9CC</div>
+              <div class="color-token">--btn-icon</div>
+              <div class="color-desc">Button icon color</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#7B808E"></div>
+            <div class="color-info">
+              <div class="color-name">Gray Button Secondary</div>
+              <div class="color-value">#7B808E</div>
+              <div class="color-token">--btn-gray-secondary</div>
+              <div class="color-desc">Gray button (dark text)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Alert Colors</h2>
+        <p class="section-desc">Semantic colors for warning, error, and informational states.</p>
+        <div class="color-grid">
+          <div class="color-card">
+            <div class="color-swatch" style="background:#FFC232"></div>
+            <div class="color-info">
+              <div class="color-name">Warning</div>
+              <div class="color-value">#FFC232</div>
+              <div class="color-token">--warning</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#E36732"></div>
+            <div class="color-info">
+              <div class="color-name">Error</div>
+              <div class="color-value">#E36732</div>
+              <div class="color-token">--error</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background:#4C8BF5"></div>
+            <div class="color-info">
+              <div class="color-name">Info</div>
+              <div class="color-value">#4C8BF5</div>
+              <div class="color-token">--info</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div id="page-typography" class="page-section">
+      <div class="page-header">
+        <h1 class="page-title">Typography</h1>
+        <p class="page-desc">Typography tokens and guidelines for consistent text rendering in the Radiotherapy Cloud platform.</p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Font Family</h2>
+        <p class="section-desc">The design system uses Inter for UI text and JetBrains Mono for code.</p>
+        <div class="font-grid">
+          <div class="font-card">
+            <div class="font-card-title" style="font-family:var(--font-sans)">Inter</div>
+            <div class="font-card-sample" style="font-family:var(--font-sans)">
+              ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+              abcdefghijklmnopqrstuvwxyz<br>
+              0123456789
+            </div>
+          </div>
+          <div class="font-card">
+            <div class="font-card-title" style="font-family:var(--font-mono)">JetBrains Mono</div>
+            <div class="font-card-sample" style="font-family:var(--font-mono)">
+              ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+              abcdefghijklmnopqrstuvwxyz<br>
+              0123456789
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Type Scale</h2>
+        <p class="section-desc">The type hierarchy used across the application, with designated colors for each level.</p>
+        <div class="type-table">
+          <div class="type-row">
+            <span class="type-label">H1</span>
+            <div class="type-sample" style="font-size:18px;font-weight:600;color:#FFFFFF">Primary Title</div>
+            <div class="type-meta">
+              <span class="type-meta-line"><span class="type-color-dot" style="background:#FFFFFF"></span>18px / 600</span>
+              <span class="type-meta-line">#FFFFFF</span>
+            </div>
+          </div>
+          <div class="type-row">
+            <span class="type-label">P1</span>
+            <div class="type-sample" style="font-size:14px;font-weight:400;color:#DCE0F2">Content Text</div>
+            <div class="type-meta">
+              <span class="type-meta-line"><span class="type-color-dot" style="background:#DCE0F2"></span>14px / 400</span>
+              <span class="type-meta-line">#DCE0F2</span>
+            </div>
+          </div>
+          <div class="type-row">
+            <span class="type-label">H2</span>
+            <div class="type-sample" style="font-size:16px;font-weight:600;color:#DCE0F2">Secondary Title</div>
+            <div class="type-meta">
+              <span class="type-meta-line"><span class="type-color-dot" style="background:#DCE0F2"></span>16px / 600</span>
+              <span class="type-meta-line">#DCE0F2</span>
+            </div>
+          </div>
+          <div class="type-row">
+            <span class="type-label">P2</span>
+            <div class="type-sample" style="font-size:12px;font-weight:400;color:#CFCFCF">Secondary Text</div>
+            <div class="type-meta">
+              <span class="type-meta-line"><span class="type-color-dot" style="background:#CFCFCF"></span>12px / 400</span>
+              <span class="type-meta-line">#CFCFCF</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPACING -->
+    <div id="page-spacing" class="page-section">
+      <div class="page-header">
+        <h1 class="page-title">Spacing</h1>
+        <p class="page-desc">A consistent spacing scale for margins, padding, and gaps, based on a 4px grid.</p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Scale</h2>
+        <p class="section-desc">The spacing scale is based on a 4px grid.</p>
+        <div class="spacing-table" id="spacing-container"></div>
+      </div>
+    </div>
+
+    <!-- BUTTON -->
+    <div id="page-button" class="page-section">
+      <div class="page-header">
+        <h1 class="page-title">Button</h1>
+        <p class="page-desc">Trigger an action or event, such as submitting a form or opening a dialog.</p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Variants</h2>
+        <div class="example-block">
+          <div class="example-preview">
+            <div class="button-row">
+              <button class="btn btn-primary">Primary</button>
+              <button class="btn btn-secondary">Secondary</button>
+            </div>
+          </div>
+          <div class="example-code">&lt;Button&gt;Primary&lt;/Button&gt;
+&lt;Button variant="secondary"&gt;Secondary&lt;/Button&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Disabled</h2>
+        <div class="example-block">
+          <div class="example-preview">
+            <div class="button-row">
+              <button class="btn btn-primary btn-disabled" disabled>Primary Disabled</button>
+              <button class="btn btn-secondary btn-disabled" disabled>Secondary Disabled</button>
+            </div>
+          </div>
+          <div class="example-code">&lt;Button disabled&gt;Primary Disabled&lt;/Button&gt;
+&lt;Button variant="secondary" disabled&gt;Secondary Disabled&lt;/Button&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">API Reference</h2>
+        <div style="overflow-x:auto">
+          <table class="props-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>variant</code></td><td><code>"primary" | "secondary"</code></td><td><code>"primary"</code></td><td>The visual style of the button.</td></tr>
+              <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether the button is disabled.</td></tr>
+              <tr><td><code>children</code></td><td><code>ReactNode</code></td><td>&mdash;</td><td>The content of the button.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div id="page-calendar" class="page-section">
+      <div class="page-header">
+        <h1 class="page-title">Calendar</h1>
+        <p class="page-desc">Date, month, and year picker components for selecting temporal values in forms.</p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Date Picker</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px;">
+            <div class="cal-field" id="datePicker1">
+              <span class="cal-label">日期</span>
+              <div class="cal-input-wrap">
+                <input class="cal-input" type="text" placeholder="选择日期" readonly id="dateInput1">
+                <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
+                <div class="cal-dropdown" id="dateDropdown1" hidden>
+                  <div class="cal-nav">
+                    <div class="cal-nav-group">
+                      <button class="cal-nav-btn" onclick="calNav('dateDropdown1','yearPrev')" title="Previous year"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 4L10.18 5.18L6.34 9L10.18 12.82L9 14L4 9L9 4ZM13 4L14.18 5.18L10.34 9L14.18 12.82L13 14L8 9L13 4Z" fill="currentColor"/></svg></button>
+                      <button class="cal-nav-btn" onclick="calNav('dateDropdown1','monthPrev')" title="Previous month"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.18 5.18L8.34 9L12.18 12.82L11 14L6 9L11 4L12.18 5.18Z" fill="currentColor"/></svg></button>
+                    </div>
+                    <span class="cal-nav-title" id="dateNavTitle1"></span>
+                    <div class="cal-nav-group">
+                      <button class="cal-nav-btn" onclick="calNav('dateDropdown1','monthNext')" title="Next month"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.0002 5.18L9.8402 9L6.0002 12.82L7.1802 14L12.1802 9L7.1802 4L6.0002 5.18Z" fill="currentColor"/></svg></button>
+                      <button class="cal-nav-btn" onclick="calNav('dateDropdown1','yearNext')" title="Next year"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.18 4L14.18 9L9.18 14L8 12.82L11.84 9L8 5.18L9.18 4ZM5.18 4L10.18 9L5.18 14L4 12.82L7.84 9L4 5.18L5.18 4Z" fill="currentColor"/></svg></button>
+                    </div>
+                  </div>
+                  <div class="cal-separator"></div>
+                  <div class="cal-weekdays">
+                    <span class="cal-weekday">日</span><span class="cal-weekday">一</span><span class="cal-weekday">二</span><span class="cal-weekday">三</span><span class="cal-weekday">四</span><span class="cal-weekday">五</span><span class="cal-weekday">六</span>
+                  </div>
+                  <div class="cal-days" id="dateDays1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Calendar
+  label="日期"
+  placeholder="选择日期"
+  onChange={(date) =&gt; console.log(date)}
+/&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Date Range Picker</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px;">
+            <div class="cal-field" id="rangePicker1">
+              <span class="cal-label">日期范围</span>
+              <div class="cal-input-wrap" style="width: 280px;">
+                <input class="cal-input" type="text" placeholder="开始日期-结束日期" readonly id="rangeInput1">
+                <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
+                <div class="cal-range-dropdown" id="rangeDropdown1" hidden>
+                  <div class="cal-range-panel" id="rangeLeftPanel1">
+                    <div class="cal-nav">
+                      <div class="cal-nav-group">
+                        <button class="cal-nav-btn" onclick="rangeNav('rangeDropdown1','yearPrev')" title="Previous year"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 4L10.18 5.18L6.34 9L10.18 12.82L9 14L4 9L9 4ZM13 4L14.18 5.18L10.34 9L14.18 12.82L13 14L8 9L13 4Z" fill="currentColor"/></svg></button>
+                        <button class="cal-nav-btn" onclick="rangeNav('rangeDropdown1','monthPrev')" title="Previous month"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.18 5.18L8.34 9L12.18 12.82L11 14L6 9L11 4L12.18 5.18Z" fill="currentColor"/></svg></button>
+                      </div>
+                      <span class="cal-nav-title" id="rangeNavTitleL1"></span>
+                      <div class="cal-nav-group" style="visibility:hidden;">
+                        <button class="cal-nav-btn"></button>
+                        <button class="cal-nav-btn"></button>
+                      </div>
+                    </div>
+                    <div class="cal-separator"></div>
+                    <div class="cal-weekdays">
+                      <span class="cal-weekday">日</span><span class="cal-weekday">一</span><span class="cal-weekday">二</span><span class="cal-weekday">三</span><span class="cal-weekday">四</span><span class="cal-weekday">五</span><span class="cal-weekday">六</span>
+                    </div>
+                    <div class="cal-days" id="rangeDaysL1"></div>
+                  </div>
+                  <div class="cal-range-panel" id="rangeRightPanel1">
+                    <div class="cal-nav">
+                      <div class="cal-nav-group" style="visibility:hidden;">
+                        <button class="cal-nav-btn"></button>
+                        <button class="cal-nav-btn"></button>
+                      </div>
+                      <span class="cal-nav-title" id="rangeNavTitleR1"></span>
+                      <div class="cal-nav-group">
+                        <button class="cal-nav-btn" onclick="rangeNav('rangeDropdown1','monthNext')" title="Next month"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.0002 5.18L9.8402 9L6.0002 12.82L7.1802 14L12.1802 9L7.1802 4L6.0002 5.18Z" fill="currentColor"/></svg></button>
+                        <button class="cal-nav-btn" onclick="rangeNav('rangeDropdown1','yearNext')" title="Next year"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.18 4L14.18 9L9.18 14L8 12.82L11.84 9L8 5.18L9.18 4ZM5.18 4L10.18 9L5.18 14L4 12.82L7.84 9L4 5.18L5.18 4Z" fill="currentColor"/></svg></button>
+                      </div>
+                    </div>
+                    <div class="cal-separator"></div>
+                    <div class="cal-weekdays">
+                      <span class="cal-weekday">日</span><span class="cal-weekday">一</span><span class="cal-weekday">二</span><span class="cal-weekday">三</span><span class="cal-weekday">四</span><span class="cal-weekday">五</span><span class="cal-weekday">六</span>
+                    </div>
+                    <div class="cal-days" id="rangeDaysR1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Calendar
+  mode="range"
+  label="日期范围"
+  placeholder="开始日期 — 结束日期"
+  onChange={({start, end}) =&gt; console.log(start, end)}
+/&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Month Picker</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px;">
+            <div class="cal-field" id="monthPicker1">
+              <span class="cal-label">日期</span>
+              <div class="cal-input-wrap">
+                <input class="cal-input" type="text" placeholder="选择月份" readonly id="monthInput1">
+                <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
+                <div class="cal-dropdown" id="monthDropdown1" hidden>
+                  <div class="cal-nav">
+                    <div class="cal-nav-group">
+                      <button class="cal-nav-btn" onclick="monthNav('monthDropdown1','yearPrev')" title="Previous year"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 4L10.18 5.18L6.34 9L10.18 12.82L9 14L4 9L9 4ZM13 4L14.18 5.18L10.34 9L14.18 12.82L13 14L8 9L13 4Z" fill="currentColor"/></svg></button>
+                      <button class="cal-nav-btn" onclick="monthNav('monthDropdown1','prev')" title="Previous"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.18 5.18L8.34 9L12.18 12.82L11 14L6 9L11 4L12.18 5.18Z" fill="currentColor"/></svg></button>
+                    </div>
+                    <span class="cal-nav-title" id="monthNavTitle1"></span>
+                    <div class="cal-nav-group">
+                      <button class="cal-nav-btn" onclick="monthNav('monthDropdown1','next')" title="Next"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.0002 5.18L9.8402 9L6.0002 12.82L7.1802 14L12.1802 9L7.1802 4L6.0002 5.18Z" fill="currentColor"/></svg></button>
+                      <button class="cal-nav-btn" onclick="monthNav('monthDropdown1','yearNext')" title="Next year"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.18 4L14.18 9L9.18 14L8 12.82L11.84 9L8 5.18L9.18 4ZM5.18 4L10.18 9L5.18 14L4 12.82L7.84 9L4 5.18L5.18 4Z" fill="currentColor"/></svg></button>
+                    </div>
+                  </div>
+                  <div class="cal-separator"></div>
+                  <div class="cal-months" id="monthGrid1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Calendar
+  mode="month"
+  label="日期"
+  placeholder="选择月份"
+  onChange={(month) =&gt; console.log(month)}
+/&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Year Picker</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px;">
+            <div class="cal-field" id="yearPicker1">
+              <span class="cal-label">日期</span>
+              <div class="cal-input-wrap">
+                <input class="cal-input" type="text" placeholder="选择年份" readonly id="yearInput1">
+                <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
+                <div class="cal-dropdown" id="yearDropdown1" hidden>
+                  <div class="cal-nav">
+                    <div class="cal-nav-group">
+                      <button class="cal-nav-btn" onclick="yearNav('yearDropdown1','prev')" title="Previous decade"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 4L10.18 5.18L6.34 9L10.18 12.82L9 14L4 9L9 4ZM13 4L14.18 5.18L10.34 9L14.18 12.82L13 14L8 9L13 4Z" fill="currentColor"/></svg></button>
+                    </div>
+                    <span class="cal-nav-title" id="yearNavTitle1"></span>
+                    <div class="cal-nav-group">
+                      <button class="cal-nav-btn" onclick="yearNav('yearDropdown1','next')" title="Next decade"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.18 4L14.18 9L9.18 14L8 12.82L11.84 9L8 5.18L9.18 4ZM5.18 4L10.18 9L5.18 14L4 12.82L7.84 9L4 5.18L5.18 4Z" fill="currentColor"/></svg></button>
+                    </div>
+                  </div>
+                  <div class="cal-separator"></div>
+                  <div class="cal-years" id="yearGrid1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Calendar
+  mode="year"
+  label="日期"
+  placeholder="选择年份"
+  onChange={(year) =&gt; console.log(year)}
+/&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Disabled</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="cal-field">
+              <span class="cal-label">日期</span>
+              <div class="cal-input-wrap">
+                <input class="cal-input" type="text" value="2020-11-02" readonly disabled>
+                <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
+              </div>
+            </div>
+            <div class="cal-field">
+              <span class="cal-label">日期</span>
+              <div class="cal-input-wrap">
+                <input class="cal-input" type="text" value="2020-11" readonly disabled>
+                <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
+              </div>
+            </div>
+            <div class="cal-field">
+              <span class="cal-label">日期</span>
+              <div class="cal-input-wrap">
+                <input class="cal-input" type="text" value="2020" readonly disabled>
+                <svg class="cal-icon" viewBox="-2 -1.5 18 18" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1.66667H3.999V0H1.75V1.66667H1.018C0.456 1.66667 0 2.11 0 2.6475V14.0192C0 14.5608 0.466 15 1.03 15H12.97C13.538 14.9986 13.999 14.5603 14 14.0192V2.6475C14 2.10583 13.541 1.66667 12.982 1.66667H12.25V0H10V1.66667ZM1.75 13.3925V5H12.25V13.3925H1.75ZM7.496 8.3333V11.6667H10.938V8.3333H7.496Z" fill="currentColor"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Calendar disabled value="2020-11-02" /&gt;
+&lt;Calendar mode="month" disabled value="2020-11" /&gt;
+&lt;Calendar mode="year" disabled value="2020" /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">API Reference</h2>
+        <div style="overflow-x:auto">
+          <table class="props-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>mode</code></td><td><code>"date" | "range" | "month" | "year"</code></td><td><code>"date"</code></td><td>Whether to pick a date, date range, month, or year.</td></tr>
+              <tr><td><code>label</code></td><td><code>string</code></td><td>&mdash;</td><td>Label text displayed before the input.</td></tr>
+              <tr><td><code>placeholder</code></td><td><code>string</code></td><td><code>"选择日期"</code></td><td>Placeholder text for the input.</td></tr>
+              <tr><td><code>value</code></td><td><code>string</code></td><td>&mdash;</td><td>Selected date (YYYY-MM-DD), month (YYYY-MM), or year (YYYY).</td></tr>
+              <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether the picker is disabled.</td></tr>
+              <tr><td><code>onChange</code></td><td><code>(value: string) =&gt; void</code></td><td>&mdash;</td><td>Callback when the selected value changes.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- INPUT -->
+    <div id="page-input" class="page-section">
+      <div class="page-header">
+        <h1 class="page-title">Input</h1>
+        <p class="page-desc">Text input field for capturing user data. Supports labels, placeholder text, and multiple interaction states.</p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Default</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="input-group">
+              <span class="input-label">姓名</span>
+              <input class="input-field" type="text" placeholder="请输入姓名">
+            </div>
+            <div class="input-group">
+              <span class="input-label">邮箱</span>
+              <input class="input-field" type="text" placeholder="请输入邮箱">
+            </div>
+            <div class="input-group">
+              <span class="input-label">备注</span>
+              <input class="input-field" type="text" placeholder="请输入备注" style="width: 350px;">
+            </div>
+          </div>
+          <div class="example-code">&lt;Input label="姓名" placeholder="请输入姓名" /&gt;
+&lt;Input label="邮箱" placeholder="请输入邮箱" /&gt;
+&lt;Input label="备注" placeholder="请输入备注" width={350} /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Small Size</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="input-group">
+              <span class="input-label-sm">姓名</span>
+              <input class="input-field-sm" type="text" placeholder="请输入姓名">
+            </div>
+            <div class="input-group">
+              <span class="input-label-sm">邮箱</span>
+              <input class="input-field-sm" type="text" placeholder="请输入邮箱">
+            </div>
+            <div class="input-group">
+              <span class="input-label-sm">备注</span>
+              <input class="input-field-sm" type="text" placeholder="请输入备注" style="width: 350px;">
+            </div>
+          </div>
+          <div class="example-code">&lt;Input label="姓名" placeholder="请输入姓名" size="small" /&gt;
+&lt;Input label="邮箱" placeholder="请输入邮箱" size="small" /&gt;
+&lt;Input label="备注" placeholder="请输入备注" size="small" width={350} /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Vertical Layout</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="input-group-vertical">
+              <span class="input-label">姓名</span>
+              <input class="input-field" type="text" placeholder="请输入姓名">
+            </div>
+            <div class="input-group-vertical">
+              <span class="input-label">邮箱</span>
+              <input class="input-field" type="text" placeholder="请输入邮箱">
+            </div>
+            <div class="input-group-vertical">
+              <span class="input-label">备注</span>
+              <input class="input-field" type="text" placeholder="请输入备注" style="width: 350px;">
+            </div>
+          </div>
+          <div class="example-code">&lt;Input label="姓名" placeholder="请输入姓名" layout="vertical" /&gt;
+&lt;Input label="邮箱" placeholder="请输入邮箱" layout="vertical" /&gt;
+&lt;Input label="备注" placeholder="请输入备注" layout="vertical" width={350} /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Error</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="input-group">
+              <span class="input-label">邮箱</span>
+              <div class="input-error-wrap">
+                <input class="input-field input-error" type="text" value="invalid-email">
+                <span class="input-error-msg">请输入有效的邮箱地址</span>
+              </div>
+            </div>
+            <div class="input-group">
+              <span class="input-label">姓名</span>
+              <div class="input-error-wrap">
+                <input class="input-field input-error" type="text" value="">
+                <span class="input-error-msg">姓名不能为空</span>
+              </div>
+            </div>
+          </div>
+          <div class="example-code">&lt;Input label="邮箱" value="invalid-email" error errorMessage="请输入有效的邮箱地址" /&gt;
+&lt;Input label="姓名" error errorMessage="姓名不能为空" /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Disabled</h2>
+        <div class="example-block">
+          <div class="example-preview" style="justify-content: flex-start; padding: 32px; gap: 32px; flex-wrap: wrap;">
+            <div class="input-group">
+              <span class="input-label">姓名</span>
+              <input class="input-field" type="text" value="张三" disabled>
+            </div>
+            <div class="input-group">
+              <span class="input-label">邮箱</span>
+              <input class="input-field" type="text" value="zhangsan@example.com" disabled>
+            </div>
+          </div>
+          <div class="example-code">&lt;Input label="姓名" value="张三" disabled /&gt;
+&lt;Input label="邮箱" value="zhangsan@example.com" disabled /&gt;</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Design Tokens</h2>
+        <div style="overflow-x:auto">
+          <table class="props-table">
+            <thead><tr><th>Token</th><th>Value</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>background</code></td><td><code>#2B2F36</code></td><td>Input background color</td></tr>
+              <tr><td><code>border-radius</code></td><td><code>2px</code></td><td>Corner radius</td></tr>
+              <tr><td><code>border-default</code></td><td><code>transparent</code></td><td>Default border (invisible)</td></tr>
+              <tr><td><code>border-hover</code></td><td><code>var(--primary) / #3B9B4D</code></td><td>Border on hover</td></tr>
+              <tr><td><code>border-focus</code></td><td><code>var(--primary) / #3B9B4D</code></td><td>Border on focus</td></tr>
+              <tr><td><code>border-error</code></td><td><code>var(--error)</code></td><td>Border on error state</td></tr>
+              <tr><td><code>text-color</code></td><td><code>#DCE0F2</code></td><td>Input text color</td></tr>
+              <tr><td><code>placeholder-color</code></td><td><code>#7B808E</code></td><td>Placeholder text color</td></tr>
+              <tr><td><code>font-size</code></td><td><code>14px</code></td><td>Input text size (default)</td></tr>
+              <tr><td><code>font-size-sm</code></td><td><code>12px</code></td><td>Input text size (small)</td></tr>
+              <tr><td><code>height</code></td><td><code>30px</code></td><td>Input field height (default)</td></tr>
+              <tr><td><code>height-sm</code></td><td><code>22px</code></td><td>Input field height (small)</td></tr>
+              <tr><td><code>width</code></td><td><code>250px</code></td><td>Default input width</td></tr>
+              <tr><td><code>padding</code></td><td><code>0 10px</code></td><td>Inner horizontal padding</td></tr>
+              <tr><td><code>disabled-opacity</code></td><td><code>0.5</code></td><td>Opacity when disabled</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">API Reference</h2>
+        <div style="overflow-x:auto">
+          <table class="props-table">
+            <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td><code>size</code></td><td><code>"default" | "small"</code></td><td><code>"default"</code></td><td>Input size. "small" uses 22px height and 12px font.</td></tr>
+              <tr><td><code>label</code></td><td><code>string</code></td><td>&mdash;</td><td>Label text displayed to the left of the input.</td></tr>
+              <tr><td><code>placeholder</code></td><td><code>string</code></td><td>&mdash;</td><td>Placeholder text shown when value is empty.</td></tr>
+              <tr><td><code>value</code></td><td><code>string</code></td><td>&mdash;</td><td>The current input value.</td></tr>
+              <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether the input is disabled.</td></tr>
+              <tr><td><code>error</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether to show error state styling.</td></tr>
+              <tr><td><code>errorMessage</code></td><td><code>string</code></td><td>&mdash;</td><td>Error message displayed below the input (requires error=true).</td></tr>
+              <tr><td><code>onChange</code></td><td><code>(value: string) =&gt; void</code></td><td>&mdash;</td><td>Callback when value changes.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL TOKENS -->
+    <div id="page-tokens" class="page-section">
+      <div class="page-header">
+        <h1 class="page-title">All Tokens</h1>
+        <p class="page-desc">Complete reference of all design tokens extracted from the Figma RT-AI component library.</p>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Color Tokens</h2>
+        <div style="overflow-x:auto">
+          <table class="token-table" id="token-color-table"></table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Typography Tokens</h2>
+        <div style="overflow-x:auto">
+          <table class="token-table">
+            <thead><tr><th>Name</th><th>Size</th><th>Weight</th><th>Color</th><th></th></tr></thead>
+            <tbody>
+              <tr><td class="token-name">H1 &mdash; Primary Title</td><td class="token-hex">18px</td><td>600</td><td class="token-hex">#FFFFFF</td><td><span class="token-dot" style="background:#FFFFFF"></span></td></tr>
+              <tr><td class="token-name">P1 &mdash; Content Text</td><td class="token-hex">14px</td><td>400</td><td class="token-hex">#DCE0F2</td><td><span class="token-dot" style="background:#DCE0F2"></span></td></tr>
+              <tr><td class="token-name">H2 &mdash; Secondary Title</td><td class="token-hex">16px</td><td>600</td><td class="token-hex">#DCE0F2</td><td><span class="token-dot" style="background:#DCE0F2"></span></td></tr>
+              <tr><td class="token-name">P2 &mdash; Secondary Text</td><td class="token-hex">12px</td><td>400</td><td class="token-hex">#CFCFCF</td><td><span class="token-dot" style="background:#CFCFCF"></span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 class="section-title">Spacing Tokens</h2>
+        <div style="overflow-x:auto">
+          <table class="token-table">
+            <thead><tr><th>Name</th><th>Value</th><th style="width:50%">Preview</th></tr></thead>
+            <tbody id="token-spacing-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const spacingData = [
+    { name: '0', value: '0px' },
+    { name: '1', value: '4px' },
+    { name: '2', value: '8px' },
+    { name: '3', value: '12px' },
+    { name: '4', value: '16px' },
+    { name: '5', value: '20px' },
+    { name: '6', value: '24px' },
+    { name: '8', value: '32px' },
+    { name: '10', value: '40px' },
+    { name: '12', value: '48px' },
+    { name: '16', value: '64px' },
+  ];
+
+  const colorTokens = [
+    { group: 'Primary', tokens: [
+      { name: 'Primary Green', token: '--primary', value: '#3B9B4D', desc: 'Main buttons, labels' },
+      { name: 'White', token: '--white', value: '#FFFFFF', desc: 'Modal titles, button text' },
+      { name: 'Dark', token: '--dark', value: '#161A1D', desc: 'Main background' },
+    ]},
+    { group: 'Green Extended', tokens: [
+      { name: 'Primary Green 50%', token: '--primary-50', value: 'rgba(59,155,77,0.5)', swatch: '#3B9B4D80', desc: 'Selected state' },
+    ]},
+    { group: 'Text', tokens: [
+      { name: 'Title Text', token: '--text-title', value: '#CFCFCF', desc: 'Title text' },
+      { name: 'Content Text', token: '--text-content', value: '#DCE0F2', desc: 'Main content text' },
+      { name: 'Placeholder', token: '--text-placeholder', value: '#7B808E', desc: 'Placeholder text' },
+      { name: 'Readonly', token: '--text-readonly', value: '#949393', desc: 'Read-only text' },
+    ]},
+    { group: 'Background', tokens: [
+      { name: 'Top Section', token: '--bg-top', value: '#1E2228', desc: 'Top section area' },
+      { name: 'Sidebar', token: '--bg-sidebar', value: '#23262B', desc: 'Left sidebar' },
+      { name: 'Surface', token: '--bg-surface', value: '#2B2F36', desc: 'Inputs, tables, top bar' },
+    ]},
+    { group: 'Button', tokens: [
+      { name: 'Gray Primary', token: '--btn-gray-primary', value: '#5A5D69', desc: 'Gray btn (white text)' },
+      { name: 'Button Icon', token: '--btn-icon', value: '#B3B9CC', desc: 'Icon color' },
+      { name: 'Gray Secondary', token: '--btn-gray-secondary', value: '#7B808E', desc: 'Gray btn (dark text)' },
+    ]},
+    { group: 'Alert', tokens: [
+      { name: 'Warning', token: '--warning', value: '#FFC232', desc: '' },
+      { name: 'Error', token: '--error', value: '#E36732', desc: '' },
+      { name: 'Info', token: '--info', value: '#4C8BF5', desc: '' },
+    ]},
+  ];
+
+  // Build spacing page
+  const sc = document.getElementById('spacing-container');
+  spacingData.forEach(s => {
+    const r = document.createElement('div');
+    r.className = 'spacing-row';
+    r.innerHTML = `<span class="spacing-label">${s.name}</span><div class="spacing-bar-container"><div class="spacing-bar" style="width:${s.value}"></div></div><span class="spacing-val">${s.value}</span>`;
+    sc.appendChild(r);
+  });
+
+  // Build token color table
+  const tct = document.getElementById('token-color-table');
+  tct.innerHTML = '<thead><tr><th></th><th>Name</th><th>Token</th><th>Value</th><th>Usage</th></tr></thead>';
+  const tbody = document.createElement('tbody');
+  colorTokens.forEach(g => {
+    const gr = document.createElement('tr');
+    gr.innerHTML = `<td colspan="5" style="font-weight:600;color:var(--fg-title);font-size:12px;text-transform:uppercase;letter-spacing:0.04em;background:var(--bg-surface);padding:8px 14px">${g.group}</td>`;
+    tbody.appendChild(gr);
+    g.tokens.forEach(t => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><span class="token-dot" style="background:${t.swatch||t.value}"></span></td><td class="token-name">${t.name}</td><td class="token-var">${t.token}</td><td class="token-hex">${t.value}</td><td class="token-desc">${t.desc}</td>`;
+      tbody.appendChild(tr);
+    });
+  });
+  tct.appendChild(tbody);
+
+  // Build spacing token table
+  const stb = document.getElementById('token-spacing-body');
+  spacingData.forEach(s => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td class="token-name">spacing-${s.name}</td><td class="token-hex">${s.value}</td><td><div style="height:8px;background:rgba(59,155,77,0.15);border:1px solid rgba(59,155,77,0.2);border-radius:3px;width:${s.value};max-width:100%"></div></td>`;
+    stb.appendChild(tr);
+  });
+
+  // Navigation
+  function showPage(id, el) {
+    document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    if (el) el.classList.add('active');
+    const titles = { colors: 'Colors', typography: 'Typography', spacing: 'Spacing', button: 'Button', calendar: 'Calendar', tokens: 'All Tokens' };
+    document.querySelector('.topbar-title').textContent = 'Design Tokens — ' + (titles[id] || '');
+    window.scrollTo(0, 0);
+    closeSidebar();
+  }
+
+  function toggleSidebar() {
+    document.querySelector('.sidebar').classList.toggle('open');
+    document.querySelector('.sidebar-overlay').classList.toggle('open');
+  }
+
+  function closeSidebar() {
+    document.querySelector('.sidebar').classList.remove('open');
+    document.querySelector('.sidebar-overlay').classList.remove('open');
+  }
+
+  // Search
+  const searchIndex = [];
+  function buildSearchIndex() {
+    const pages = document.querySelectorAll('.page-section');
+    const pageNames = { 'page-colors': 'Colors', 'page-typography': 'Typography', 'page-spacing': 'Spacing', 'page-button': 'Button', 'page-calendar': 'Calendar', 'page-input': 'Input', 'page-tokens': 'All Tokens' };
+    const pageIds = { 'page-colors': 'colors', 'page-typography': 'typography', 'page-spacing': 'spacing', 'page-button': 'button', 'page-calendar': 'calendar', 'page-input': 'input', 'page-tokens': 'tokens' };
+    pages.forEach(page => {
+      const pid = page.id;
+      const pname = pageNames[pid] || pid;
+      const pkey = pageIds[pid] || pid;
+      const els = page.querySelectorAll('.section-title, .subsection-title, .color-name, .color-value, .color-token, .color-desc, .token-name, .token-var, .token-hex, .token-desc, .type-label, .type-sample, .type-meta-line, .font-card-title, .page-title, .page-desc, .section-desc, .props-table td, .spacing-label, .spacing-val');
+      els.forEach(el => {
+        const text = el.textContent.trim();
+        if (text && text.length > 0 && text.length < 200) {
+          searchIndex.push({ text, page: pname, pageKey: pkey, el });
+        }
+      });
+    });
+  }
+
+  const searchInput = document.getElementById('searchInput');
+  const searchResults = document.getElementById('searchResults');
+
+  searchInput.addEventListener('input', function() {
+    const q = this.value.trim().toLowerCase();
+    if (q.length < 1) { searchResults.hidden = true; return; }
+    const matches = [];
+    const seen = new Set();
+    searchIndex.forEach(item => {
+      const idx = item.text.toLowerCase().indexOf(q);
+      if (idx !== -1) {
+        const key = item.page + '|' + item.text;
+        if (!seen.has(key)) {
+          seen.add(key);
+          matches.push(item);
+        }
+      }
+    });
+    if (matches.length === 0) {
+      searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+      searchResults.hidden = false;
+      return;
+    }
+    const limited = matches.slice(0, 20);
+    searchResults.innerHTML = limited.map((m, i) => {
+      const text = m.text;
+      const lower = text.toLowerCase();
+      const idx = lower.indexOf(q);
+      const before = text.slice(0, idx);
+      const match = text.slice(idx, idx + q.length);
+      const after = text.slice(idx + q.length);
+      const snippet = before + '<mark>' + match + '</mark>' + after;
+      return '<div class="search-result-item" data-page="' + m.pageKey + '" data-idx="' + i + '"><div class="search-result-page">' + m.page + '</div><div class="search-result-snippet">' + snippet + '</div></div>';
+    }).join('');
+    searchResults.hidden = false;
+    searchResults.querySelectorAll('.search-result-item').forEach((item, i) => {
+      item.addEventListener('click', function() {
+        const pk = this.dataset.page;
+        const navLink = document.querySelector('.nav-link[onclick*="' + pk + '"]');
+        showPage(pk, navLink);
+        searchResults.hidden = true;
+        searchInput.value = '';
+        const m = limited[i];
+        if (m && m.el) {
+          setTimeout(() => { m.el.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);
+        }
+      });
+    });
+  });
+
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') { searchResults.hidden = true; this.blur(); }
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.search-container')) searchResults.hidden = true;
+  });
+
+  // Calendar date picker
+  const calState = {};
+
+  function initDatePicker(dropdownId, inputId, titleId, daysId) {
+    const now = new Date();
+    calState[dropdownId] = { year: now.getFullYear(), month: now.getMonth(), selected: null };
+    renderDatePicker(dropdownId, titleId, daysId, inputId);
+  }
+
+  function renderDatePicker(dropdownId, titleId, daysId, inputId) {
+    const s = calState[dropdownId];
+    const titleEl = document.getElementById(titleId);
+    const daysEl = document.getElementById(daysId);
+    titleEl.textContent = s.year + '年 ' + (s.month + 1) + '月';
+
+    const firstDay = new Date(s.year, s.month, 1).getDay();
+    const daysInMonth = new Date(s.year, s.month + 1, 0).getDate();
+    const prevDays = new Date(s.year, s.month, 0).getDate();
+
+    let html = '';
+    for (let i = firstDay - 1; i >= 0; i--) {
+      html += '<button class="cal-day other-month" data-date="">' + (prevDays - i) + '</button>';
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = s.year + '-' + String(s.month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      const sel = s.selected === dateStr ? ' selected' : '';
+      html += '<button class="cal-day' + sel + '" data-date="' + dateStr + '">' + d + '</button>';
+    }
+    const totalCells = firstDay + daysInMonth;
+    const remaining = (7 - (totalCells % 7)) % 7;
+    for (let i = 1; i <= remaining; i++) {
+      html += '<button class="cal-day other-month" data-date="">' + i + '</button>';
+    }
+    daysEl.innerHTML = html;
+
+    daysEl.querySelectorAll('.cal-day').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const d = this.dataset.date;
+        if (!d) return;
+        s.selected = d;
+        document.getElementById(inputId).value = d;
+        document.getElementById(dropdownId).hidden = true;
+        renderDatePicker(dropdownId, titleId, daysId, inputId);
+      });
+    });
+  }
+
+  function calNav(dropdownId, action) {
+    const s = calState[dropdownId];
+    if (action === 'yearPrev') s.year--;
+    else if (action === 'yearNext') s.year++;
+    else if (action === 'monthPrev') { s.month--; if (s.month < 0) { s.month = 11; s.year--; } }
+    else if (action === 'monthNext') { s.month++; if (s.month > 11) { s.month = 0; s.year++; } }
+    const titleId = dropdownId.replace('Dropdown', 'NavTitle');
+    const daysId = dropdownId.replace('Dropdown', 'Days');
+    const inputId = dropdownId.replace('Dropdown', 'Input');
+    renderDatePicker(dropdownId, titleId, daysId, inputId);
+  }
+
+  // Month picker
+  const monthState = {};
+
+  function initMonthPicker(dropdownId, inputId, titleId, gridId) {
+    const now = new Date();
+    monthState[dropdownId] = { year: now.getFullYear(), selected: null };
+    renderMonthPicker(dropdownId, titleId, gridId, inputId);
+  }
+
+  function renderMonthPicker(dropdownId, titleId, gridId, inputId) {
+    const s = monthState[dropdownId];
+    document.getElementById(titleId).textContent = s.year + '年';
+    const gridEl = document.getElementById(gridId);
+    let html = '';
+    for (let m = 1; m <= 12; m++) {
+      const val = s.year + '-' + String(m).padStart(2, '0');
+      const sel = s.selected === val ? ' selected' : '';
+      html += '<button class="cal-month-btn' + sel + '" data-month="' + val + '">' + m + '月</button>';
+    }
+    gridEl.innerHTML = html;
+
+    gridEl.querySelectorAll('.cal-month-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const v = this.dataset.month;
+        s.selected = v;
+        document.getElementById(inputId).value = v;
+        document.getElementById(dropdownId).hidden = true;
+        renderMonthPicker(dropdownId, titleId, gridId, inputId);
+      });
+    });
+  }
+
+  function monthNav(dropdownId, action) {
+    const s = monthState[dropdownId];
+    if (action === 'yearPrev') s.year--;
+    else if (action === 'yearNext') s.year++;
+    else if (action === 'prev') s.year--;
+    else if (action === 'next') s.year++;
+    const titleId = dropdownId.replace('Dropdown', 'NavTitle');
+    const gridId = dropdownId.replace('Dropdown', 'Grid');
+    const inputId = dropdownId.replace('Dropdown', 'Input');
+    renderMonthPicker(dropdownId, titleId, gridId, inputId);
+  }
+
+  // Year picker
+  const yearState = {};
+
+  function initYearPicker(dropdownId, inputId, titleId, gridId) {
+    const now = new Date();
+    const decade = Math.floor(now.getFullYear() / 10) * 10;
+    yearState[dropdownId] = { decade: decade, selected: null };
+    renderYearPicker(dropdownId, titleId, gridId, inputId);
+  }
+
+  function renderYearPicker(dropdownId, titleId, gridId, inputId) {
+    const s = yearState[dropdownId];
+    document.getElementById(titleId).textContent = s.decade + ' - ' + (s.decade + 9);
+    const gridEl = document.getElementById(gridId);
+    let html = '';
+    for (let y = s.decade; y < s.decade + 12; y++) {
+      const outOfRange = y < s.decade || y > s.decade + 9;
+      const sel = s.selected === String(y) ? ' selected' : '';
+      const cls = outOfRange ? ' other-month' : '';
+      html += '<button class="cal-year-btn' + sel + cls + '" data-year="' + y + '"' + (outOfRange ? ' style="color:var(--fg-muted)"' : '') + '>' + y + '</button>';
+    }
+    gridEl.innerHTML = html;
+
+    gridEl.querySelectorAll('.cal-year-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const v = this.dataset.year;
+        s.selected = v;
+        document.getElementById(inputId).value = v;
+        document.getElementById(dropdownId).hidden = true;
+        renderYearPicker(dropdownId, titleId, gridId, inputId);
+      });
+    });
+  }
+
+  function yearNav(dropdownId, action) {
+    const s = yearState[dropdownId];
+    if (action === 'prev') s.decade -= 10;
+    else if (action === 'next') s.decade += 10;
+    const titleId = dropdownId.replace('Dropdown', 'NavTitle');
+    const gridId = dropdownId.replace('Dropdown', 'Grid');
+    const inputId = dropdownId.replace('Dropdown', 'Input');
+    renderYearPicker(dropdownId, titleId, gridId, inputId);
+  }
+
+  // Date range picker
+  const rangeState = {};
+
+  function initRangePicker(dropdownId, inputId, titleLId, titleRId, daysLId, daysRId) {
+    const now = new Date();
+    rangeState[dropdownId] = { year: now.getFullYear(), month: now.getMonth(), start: null, end: null, picking: 'start', inputId: inputId, titleLId: titleLId, titleRId: titleRId, daysLId: daysLId, daysRId: daysRId };
+    renderRangePicker(dropdownId);
+    var containers = [document.getElementById(daysLId), document.getElementById(daysRId)];
+    function clearHover() {
+      containers.forEach(function(c) { c.querySelectorAll('.cal-day').forEach(function(b) { b.classList.remove('hover-in-range', 'hover-range-end'); }); });
+    }
+    containers.forEach(function(container) {
+      container.addEventListener('mouseover', function(e) {
+        var btn = e.target.closest('.cal-day');
+        var s = rangeState[dropdownId];
+        if (!btn || !btn.dataset.date || s.picking !== 'end') return;
+        clearHover();
+        var hd = btn.dataset.date, rs = s.start, re = hd;
+        if (hd < s.start) { rs = hd; re = s.start; }
+        containers.forEach(function(c) {
+          c.querySelectorAll('.cal-day').forEach(function(b) {
+            var d = b.dataset.date;
+            if (!d) return;
+            if (d === hd) b.classList.add('hover-range-end');
+            else if (d > rs && d < re) b.classList.add('hover-in-range');
+          });
+        });
+      });
+      container.addEventListener('mouseleave', clearHover);
+    });
+  }
+
+  function renderRangePanel(s, year, month, daysElId, dropdownId) {
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const prevDays = new Date(year, month, 0).getDate();
+    const daysEl = document.getElementById(daysElId);
+    let html = '';
+    for (let i = firstDay - 1; i >= 0; i--) {
+      html += '<button class="cal-day other-month" data-date="">' + (prevDays - i) + '</button>';
+    }
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      let cls = '';
+      if (s.start === dateStr && s.end === dateStr) cls = ' range-start range-end';
+      else if (s.start === dateStr) cls = ' range-start';
+      else if (s.end === dateStr) cls = ' range-end';
+      else if (s.start && s.end && dateStr > s.start && dateStr < s.end) cls = ' in-range';
+      html += '<button class="cal-day' + cls + '" data-date="' + dateStr + '">' + d + '</button>';
+    }
+    const totalCells = firstDay + daysInMonth;
+    const remaining = (7 - (totalCells % 7)) % 7;
+    for (let i = 1; i <= remaining; i++) {
+      html += '<button class="cal-day other-month" data-date="">' + i + '</button>';
+    }
+    daysEl.innerHTML = html;
+    daysEl.querySelectorAll('.cal-day').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const d = this.dataset.date;
+        if (!d) return;
+        if (s.picking === 'start') {
+          s.start = d;
+          s.end = null;
+          s.picking = 'end';
+        } else {
+          if (d < s.start) {
+            s.end = s.start;
+            s.start = d;
+          } else {
+            s.end = d;
+          }
+          s.picking = 'start';
+          document.getElementById(dropdownId).hidden = true;
+        }
+        updateRangeInput(s);
+        renderRangePicker(dropdownId);
+      });
+    });
+  }
+
+  function updateRangeInput(s) {
+    const input = document.getElementById(s.inputId);
+    var overlay = document.getElementById(s.inputId + '_overlay');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.id = s.inputId + '_overlay';
+      overlay.style.cssText = 'position:absolute;top:0;left:0;right:32px;height:100%;display:flex;align-items:center;gap:5px;padding:0 10px;pointer-events:none;font-size:14px;font-family:var(--font-sans);';
+      input.parentNode.appendChild(overlay);
+    }
+    if (s.start && s.end) {
+      input.value = '';
+      input.placeholder = '';
+      overlay.style.display = 'flex';
+      overlay.innerHTML = '<span style="color:var(--fg)">' + s.start + '</span><span style="color:var(--fg)">-</span><span style="color:var(--fg)">' + s.end + '</span>';
+    } else if (s.start) {
+      input.value = '';
+      input.placeholder = '';
+      overlay.style.display = 'flex';
+      overlay.innerHTML = '<span style="color:var(--fg)">' + s.start + '</span><span style="color:var(--fg-muted)">-</span><span style="color:var(--fg-muted)">结束日期</span>';
+    } else {
+      input.value = '';
+      input.placeholder = '开始日期-结束日期';
+      overlay.style.display = 'none';
+    }
+  }
+
+  function renderRangePicker(dropdownId) {
+    const s = rangeState[dropdownId];
+    var rYear = s.month === 11 ? s.year + 1 : s.year;
+    var rMonth = s.month === 11 ? 0 : s.month + 1;
+    document.getElementById(s.titleLId).textContent = s.year + '年 ' + (s.month + 1) + '月';
+    document.getElementById(s.titleRId).textContent = rYear + '年 ' + (rMonth + 1) + '月';
+    renderRangePanel(s, s.year, s.month, s.daysLId, dropdownId);
+    renderRangePanel(s, rYear, rMonth, s.daysRId, dropdownId);
+  }
+
+  function rangeNav(dropdownId, action) {
+    const s = rangeState[dropdownId];
+    if (action === 'yearPrev') s.year--;
+    else if (action === 'yearNext') s.year++;
+    else if (action === 'monthPrev') { s.month--; if (s.month < 0) { s.month = 11; s.year--; } }
+    else if (action === 'monthNext') { s.month++; if (s.month > 11) { s.month = 0; s.year++; } }
+    renderRangePicker(dropdownId);
+  }
+
+  // Toggle dropdowns on input click
+  const allDropdowns = ['dateDropdown1', 'rangeDropdown1', 'monthDropdown1', 'yearDropdown1'];
+
+  function closeOtherDropdowns(except) {
+    allDropdowns.forEach(id => { if (id !== except) document.getElementById(id).hidden = true; });
+  }
+
+  document.getElementById('dateInput1').addEventListener('click', function() {
+    const dd = document.getElementById('dateDropdown1');
+    dd.hidden = !dd.hidden;
+    closeOtherDropdowns('dateDropdown1');
+  });
+
+  document.getElementById('rangeInput1').addEventListener('click', function() {
+    const dd = document.getElementById('rangeDropdown1');
+    dd.hidden = !dd.hidden;
+    closeOtherDropdowns('rangeDropdown1');
+  });
+
+  document.getElementById('monthInput1').addEventListener('click', function() {
+    const dd = document.getElementById('monthDropdown1');
+    dd.hidden = !dd.hidden;
+    closeOtherDropdowns('monthDropdown1');
+  });
+
+  document.getElementById('yearInput1').addEventListener('click', function() {
+    const dd = document.getElementById('yearDropdown1');
+    dd.hidden = !dd.hidden;
+    closeOtherDropdowns('yearDropdown1');
+  });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('#datePicker1')) document.getElementById('dateDropdown1').hidden = true;
+    if (!e.target.closest('#rangePicker1')) document.getElementById('rangeDropdown1').hidden = true;
+    if (!e.target.closest('#monthPicker1')) document.getElementById('monthDropdown1').hidden = true;
+    if (!e.target.closest('#yearPicker1')) document.getElementById('yearDropdown1').hidden = true;
+  });
+
+  initDatePicker('dateDropdown1', 'dateInput1', 'dateNavTitle1', 'dateDays1');
+  initRangePicker('rangeDropdown1', 'rangeInput1', 'rangeNavTitleL1', 'rangeNavTitleR1', 'rangeDaysL1', 'rangeDaysR1');
+  initMonthPicker('monthDropdown1', 'monthInput1', 'monthNavTitle1', 'monthGrid1');
+  initYearPicker('yearDropdown1', 'yearInput1', 'yearNavTitle1', 'yearGrid1');
+
+  document.querySelectorAll('.example-code').forEach(function(codeEl) {
+    var toggle = document.createElement('button');
+    toggle.className = 'code-toggle';
+    toggle.innerHTML = '<span class="toggle-icon">▶</span> Show Code';
+    toggle.addEventListener('click', function() {
+      var expanded = toggle.classList.toggle('expanded');
+      toggle.innerHTML = expanded
+        ? '<span class="toggle-icon">▶</span> Hide Code'
+        : '<span class="toggle-icon">▶</span> Show Code';
+    });
+    codeEl.parentNode.insertBefore(toggle, codeEl);
+  });
+
+  buildSearchIndex();
+</script>

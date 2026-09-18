@@ -18,13 +18,13 @@ export default function ButtonPage() {
 <Button variant="outline">Outline</Button>`}
         >
           <div className="flex gap-3">
-            <button className="h-9 px-4 text-sm font-medium rounded-md bg-foreground text-background hover:opacity-90 transition-opacity">
+            <button className="h-9 px-4 text-sm font-medium rounded-md text-white hover:opacity-90 transition-opacity" style={{ backgroundColor: '#3B9B4D' }}>
               Default
             </button>
-            <button className="h-9 px-4 text-sm font-medium rounded-md bg-accent text-foreground border border-border hover:bg-hover transition-colors">
+            <button className="h-9 px-4 text-sm font-medium rounded-md text-white hover:opacity-90 transition-opacity" style={{ backgroundColor: '#5A5D69' }}>
               Secondary
             </button>
-            <button className="h-9 px-4 text-sm font-medium rounded-md border border-border text-foreground hover:bg-hover transition-colors">
+            <button className="h-9 px-4 text-sm font-medium rounded-md border text-foreground hover:bg-hover transition-colors" style={{ borderColor: '#7B808E' }}>
               Outline
             </button>
           </div>
@@ -38,13 +38,13 @@ export default function ButtonPage() {
 <Button size="lg">Large</Button>`}
         >
           <div className="flex items-center gap-3">
-            <button className="h-7 px-3 text-xs font-medium rounded-md bg-foreground text-background">
+            <button className="h-7 px-3 text-xs font-medium rounded-md text-white" style={{ backgroundColor: '#3B9B4D' }}>
               Small
             </button>
-            <button className="h-9 px-4 text-sm font-medium rounded-md bg-foreground text-background">
+            <button className="h-9 px-4 text-sm font-medium rounded-md text-white" style={{ backgroundColor: '#3B9B4D' }}>
               Medium
             </button>
-            <button className="h-11 px-6 text-base font-medium rounded-md bg-foreground text-background">
+            <button className="h-11 px-6 text-base font-medium rounded-md text-white" style={{ backgroundColor: '#3B9B4D' }}>
               Large
             </button>
           </div>
