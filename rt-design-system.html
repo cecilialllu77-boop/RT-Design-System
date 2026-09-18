@@ -1982,13 +1982,16 @@
     }
     if (s.start && s.end) {
       input.value = s.start + '-' + s.end;
+      input.placeholder = '';
       overlay.style.display = 'none';
     } else if (s.start) {
       input.value = '';
+      input.placeholder = '';
       overlay.style.display = 'flex';
       overlay.innerHTML = '<span style="color:var(--fg)">' + s.start + '</span><span style="color:var(--fg-muted)">-</span><span style="color:var(--fg-muted)">结束日期</span>';
     } else {
       input.value = '';
+      input.placeholder = '开始日期-结束日期';
       overlay.style.display = 'none';
     }
   }
