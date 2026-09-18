@@ -2009,9 +2009,10 @@
       input.parentNode.appendChild(overlay);
     }
     if (s.start && s.end) {
-      input.value = s.start + '-' + s.end;
+      input.value = '';
       input.placeholder = '';
-      overlay.style.display = 'none';
+      overlay.style.display = 'flex';
+      overlay.innerHTML = '<span style="color:var(--fg)">' + s.start + '</span><span style="color:var(--fg)">-</span><span style="color:var(--fg)">' + s.end + '</span>';
     } else if (s.start) {
       input.value = '';
       input.placeholder = '';
