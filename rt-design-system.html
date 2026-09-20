@@ -1179,12 +1179,12 @@
     <div id="page-colors" class="page-section active">
       <div class="page-header">
         <h1 class="page-title">Colors</h1>
-        <p class="page-desc">The color system is organized into five palettes: Grey (neutral), Green (brand), Yellow (warning), Red (error), and Blue (info). Each palette uses a C10–C100 scale from lightest to darkest.</p>
+        <p class="page-desc">The color system is organized into five palettes: Grey (neutral), Green (brand), Yellow (warning), Red (error), and Blue (info). Each palette uses a C10–C100 scale from lightest to darkest. All usage descriptions are defined in the context of a dark theme.</p>
       </div>
 
       <div class="section">
         <h2 class="section-title">Grey / Neutral</h2>
-        <p class="section-desc">Foundation palette for backgrounds, text, borders, and secondary UI elements. Ranges from white (C00) to black (C110) in 12 steps.</p>
+        <p class="section-desc">Foundation palette for backgrounds, text, borders, and secondary UI elements on dark surfaces. Ranges from white (C00) to black (C110) in 12 steps.</p>
         <div class="palette-strip">
           <div class="palette-cell"><div class="palette-swatch" style="background:#FFFFFF;border:1px solid var(--border)"></div><div class="palette-label">C00</div><div class="palette-hex">#FFFFFF</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#E7ECF0"></div><div class="palette-label">C10</div><div class="palette-hex">#E7ECF0</div></div>
@@ -1203,18 +1203,18 @@
           <table class="usage-table">
             <thead><tr><th style="width:40px"></th><th>Step</th><th>Hex</th><th>Usage</th></tr></thead>
             <tbody>
-              <tr><td><span class="usage-dot" style="background:#FFFFFF;border:1px solid var(--border)"></span></td><td class="usage-step">C00</td><td class="usage-hex">#FFFFFF</td><td class="usage-desc">Primary button text, modal title text, table header text</td></tr>
-              <tr><td><span class="usage-dot" style="background:#E7ECF0"></span></td><td class="usage-step">C10</td><td class="usage-hex">#E7ECF0</td><td class="usage-desc">Light dividers, separator lines in light-themed areas</td></tr>
-              <tr><td><span class="usage-dot" style="background:#D0DAE1"></span></td><td class="usage-step">C20</td><td class="usage-hex">#D0DAE1</td><td class="usage-desc">Disabled text on light backgrounds, tertiary icons</td></tr>
-              <tr><td><span class="usage-dot" style="background:#B2C1CC"></span></td><td class="usage-step">C30</td><td class="usage-hex">#B2C1CC</td><td class="usage-desc">Button icon color, secondary icon color</td></tr>
-              <tr><td><span class="usage-dot" style="background:#97A5AF"></span></td><td class="usage-step">C40</td><td class="usage-hex">#97A5AF</td><td class="usage-desc">Placeholder text, inactive tab text, muted icons</td></tr>
-              <tr><td><span class="usage-dot" style="background:#75818A"></span></td><td class="usage-step">C50</td><td class="usage-hex">#75818A</td><td class="usage-desc">Readonly text, secondary/muted body text, calendar icon</td></tr>
-              <tr><td><span class="usage-dot" style="background:#5A6772"></span></td><td class="usage-step">C60</td><td class="usage-hex">#5A6772</td><td class="usage-desc">Secondary button normal state, subtle borders</td></tr>
-              <tr><td><span class="usage-dot" style="background:#4B555D"></span></td><td class="usage-step">C70</td><td class="usage-hex">#4B555D</td><td class="usage-desc">Secondary button hover state, input active borders</td></tr>
-              <tr><td><span class="usage-dot" style="background:#333B42"></span></td><td class="usage-step">C80</td><td class="usage-hex">#333B42</td><td class="usage-desc">Input/card background, surface elements, table background</td></tr>
-              <tr><td><span class="usage-dot" style="background:#21272B"></span></td><td class="usage-step">C90</td><td class="usage-hex">#21272B</td><td class="usage-desc">Sidebar background, elevated panel background</td></tr>
-              <tr><td><span class="usage-dot" style="background:#161A1D"></span></td><td class="usage-step">C100</td><td class="usage-hex">#161A1D</td><td class="usage-desc">Main page background, app shell background</td></tr>
-              <tr><td><span class="usage-dot" style="background:#000000"></span></td><td class="usage-step">C110</td><td class="usage-hex">#000000</td><td class="usage-desc">Pure black, deepest overlay backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FFFFFF;border:1px solid var(--border)"></span></td><td class="usage-step">C00</td><td class="usage-hex">#FFFFFF</td><td class="usage-desc">Primary button text on dark surfaces, modal title text, table header text</td></tr>
+              <tr><td><span class="usage-dot" style="background:#E7ECF0"></span></td><td class="usage-step">C10</td><td class="usage-hex">#E7ECF0</td><td class="usage-desc">Primary body text on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#D0DAE1"></span></td><td class="usage-step">C20</td><td class="usage-hex">#D0DAE1</td><td class="usage-desc">Secondary body text on dark backgrounds, tertiary icons</td></tr>
+              <tr><td><span class="usage-dot" style="background:#B2C1CC"></span></td><td class="usage-step">C30</td><td class="usage-hex">#B2C1CC</td><td class="usage-desc">Button icon color on dark surfaces, secondary icon color</td></tr>
+              <tr><td><span class="usage-dot" style="background:#97A5AF"></span></td><td class="usage-step">C40</td><td class="usage-hex">#97A5AF</td><td class="usage-desc">Placeholder text on dark backgrounds, inactive tab text, muted icons</td></tr>
+              <tr><td><span class="usage-dot" style="background:#75818A"></span></td><td class="usage-step">C50</td><td class="usage-hex">#75818A</td><td class="usage-desc"><strong>Secondary button hover state</strong>, readonly text, muted body text</td></tr>
+              <tr><td><span class="usage-dot" style="background:#5A6772"></span></td><td class="usage-step">C60</td><td class="usage-hex">#5A6772</td><td class="usage-desc"><strong>Secondary button normal state</strong>, subtle borders on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#4B555D"></span></td><td class="usage-step">C70</td><td class="usage-hex">#4B555D</td><td class="usage-desc"><strong>Secondary button click/active state</strong>, input active borders</td></tr>
+              <tr><td><span class="usage-dot" style="background:#333B42"></span></td><td class="usage-step">C80</td><td class="usage-hex">#333B42</td><td class="usage-desc"><strong>Secondary button disabled state</strong>, input/card background, surface elements</td></tr>
+              <tr><td><span class="usage-dot" style="background:#21272B"></span></td><td class="usage-step">C90</td><td class="usage-hex">#21272B</td><td class="usage-desc">Sidebar background, elevated panel background on dark theme</td></tr>
+              <tr><td><span class="usage-dot" style="background:#161A1D"></span></td><td class="usage-step">C100</td><td class="usage-hex">#161A1D</td><td class="usage-desc">Main page background, app shell background (dark theme base)</td></tr>
+              <tr><td><span class="usage-dot" style="background:#000000"></span></td><td class="usage-step">C110</td><td class="usage-hex">#000000</td><td class="usage-desc">Pure black, deepest overlay backgrounds on dark theme</td></tr>
             </tbody>
           </table>
         </div>
@@ -1222,14 +1222,14 @@
 
       <div class="section">
         <h2 class="section-title">Green / Brand</h2>
-        <p class="section-desc">Brand color palette used for primary actions, success states, and key interactions. C50 is the core brand color.</p>
+        <p class="section-desc">Brand color palette used for primary actions, success states, and key interactions. C60 is the core brand color.</p>
         <div class="palette-strip">
           <div class="palette-cell"><div class="palette-swatch" style="background:#E5F9EA"></div><div class="palette-label">C10</div><div class="palette-hex">#E5F9EA</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#BDEAC5"></div><div class="palette-label">C20</div><div class="palette-hex">#BDEAC5</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#75D186"></div><div class="palette-label">C30</div><div class="palette-hex">#75D186</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#5AAF6A"></div><div class="palette-label">C40</div><div class="palette-hex">#5AAF6A</div></div>
-          <div class="palette-cell palette-key"><div class="palette-swatch" style="background:#3B9B4D"></div><div class="palette-label">C50</div><div class="palette-hex">#3B9B4D</div></div>
-          <div class="palette-cell"><div class="palette-swatch" style="background:#1F7F31"></div><div class="palette-label">C60</div><div class="palette-hex">#1F7F31</div></div>
+          <div class="palette-cell"><div class="palette-swatch" style="background:#3B9B4D"></div><div class="palette-label">C50</div><div class="palette-hex">#3B9B4D</div></div>
+          <div class="palette-cell palette-key"><div class="palette-swatch" style="background:#1F7F31"></div><div class="palette-label">C60</div><div class="palette-hex">#1F7F31</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#196728"></div><div class="palette-label">C70</div><div class="palette-hex">#196728</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#134E1E"></div><div class="palette-label">C80</div><div class="palette-hex">#134E1E</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#0D3515"></div><div class="palette-label">C90</div><div class="palette-hex">#0D3515</div></div>
@@ -1239,14 +1239,14 @@
           <table class="usage-table">
             <thead><tr><th style="width:40px"></th><th>Step</th><th>Hex</th><th>Usage</th></tr></thead>
             <tbody>
-              <tr><td><span class="usage-dot" style="background:#E5F9EA"></span></td><td class="usage-step">C10</td><td class="usage-hex">#E5F9EA</td><td class="usage-desc">Success notification background, success badge tint</td></tr>
-              <tr><td><span class="usage-dot" style="background:#BDEAC5"></span></td><td class="usage-step">C20</td><td class="usage-hex">#BDEAC5</td><td class="usage-desc">Selected row highlight, success border</td></tr>
-              <tr><td><span class="usage-dot" style="background:#75D186"></span></td><td class="usage-step">C30</td><td class="usage-hex">#75D186</td><td class="usage-desc">Date range hover preview, progress bar fill</td></tr>
-              <tr><td><span class="usage-dot" style="background:#5AAF6A"></span></td><td class="usage-step">C40</td><td class="usage-hex">#5AAF6A</td><td class="usage-desc">Primary button hover state</td></tr>
-              <tr><td><span class="usage-dot" style="background:#3B9B4D"></span></td><td class="usage-step">C50</td><td class="usage-hex">#3B9B4D</td><td class="usage-desc"><strong>Primary button normal state</strong>, focus borders, brand accent, input hover/focus border</td></tr>
-              <tr><td><span class="usage-dot" style="background:#1F7F31"></span></td><td class="usage-step">C60</td><td class="usage-hex">#1F7F31</td><td class="usage-desc">Primary button click/active state</td></tr>
-              <tr><td><span class="usage-dot" style="background:#196728"></span></td><td class="usage-step">C70</td><td class="usage-hex">#196728</td><td class="usage-desc">Primary button deep pressed, sidebar logo gradient end</td></tr>
-              <tr><td><span class="usage-dot" style="background:#134E1E"></span></td><td class="usage-step">C80</td><td class="usage-hex">#134E1E</td><td class="usage-desc">Reserved — dark accent</td></tr>
+              <tr><td><span class="usage-dot" style="background:#E5F9EA"></span></td><td class="usage-step">C10</td><td class="usage-hex">#E5F9EA</td><td class="usage-desc">Success notification text on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#BDEAC5"></span></td><td class="usage-step">C20</td><td class="usage-hex">#BDEAC5</td><td class="usage-desc">Success text highlight, success border on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#75D186"></span></td><td class="usage-step">C30</td><td class="usage-hex">#75D186</td><td class="usage-desc">Date range hover preview on dark surfaces, progress bar fill</td></tr>
+              <tr><td><span class="usage-dot" style="background:#5AAF6A"></span></td><td class="usage-step">C40</td><td class="usage-hex">#5AAF6A</td><td class="usage-desc">Active selection highlight, progress bar fill</td></tr>
+              <tr><td><span class="usage-dot" style="background:#3B9B4D"></span></td><td class="usage-step">C50</td><td class="usage-hex">#3B9B4D</td><td class="usage-desc"><strong>Primary button hover state</strong>, input hover/focus border</td></tr>
+              <tr><td><span class="usage-dot" style="background:#1F7F31"></span></td><td class="usage-step">C60</td><td class="usage-hex">#1F7F31</td><td class="usage-desc"><strong>Primary button normal state</strong>, brand accent on dark surfaces, focus borders</td></tr>
+              <tr><td><span class="usage-dot" style="background:#196728"></span></td><td class="usage-step">C70</td><td class="usage-hex">#196728</td><td class="usage-desc"><strong>Primary button click/active state</strong>, sidebar logo gradient end</td></tr>
+              <tr><td><span class="usage-dot" style="background:#134E1E"></span></td><td class="usage-step">C80</td><td class="usage-hex">#134E1E</td><td class="usage-desc"><strong>Primary button disabled state</strong></td></tr>
               <tr><td><span class="usage-dot" style="background:#0D3515"></span></td><td class="usage-step">C90</td><td class="usage-hex">#0D3515</td><td class="usage-desc">Reserved</td></tr>
               <tr><td><span class="usage-dot" style="background:#0A2B10"></span></td><td class="usage-step">C100</td><td class="usage-hex">#0A2B10</td><td class="usage-desc">Reserved</td></tr>
             </tbody>
@@ -1256,7 +1256,7 @@
 
       <div class="section">
         <h2 class="section-title">Yellow / Warning</h2>
-        <p class="section-desc">Warning and caution palette. C50 is the core warning color for alerts, badges, and status indicators.</p>
+        <p class="section-desc">Warning and caution palette. C50 is the core warning color for alerts, badges, and status indicators on dark surfaces.</p>
         <div class="palette-strip">
           <div class="palette-cell"><div class="palette-swatch" style="background:#FFF4D9"></div><div class="palette-label">C10</div><div class="palette-hex">#FFF4D9</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#FFEDC1"></div><div class="palette-label">C20</div><div class="palette-hex">#FFEDC1</div></div>
@@ -1273,14 +1273,14 @@
           <table class="usage-table">
             <thead><tr><th style="width:40px"></th><th>Step</th><th>Hex</th><th>Usage</th></tr></thead>
             <tbody>
-              <tr><td><span class="usage-dot" style="background:#FFF4D9"></span></td><td class="usage-step">C10</td><td class="usage-hex">#FFF4D9</td><td class="usage-desc">Warning notification background tint</td></tr>
-              <tr><td><span class="usage-dot" style="background:#FFEDC1"></span></td><td class="usage-step">C20</td><td class="usage-hex">#FFEDC1</td><td class="usage-desc">Warning highlight background, toast background</td></tr>
-              <tr><td><span class="usage-dot" style="background:#FFE29D"></span></td><td class="usage-step">C30</td><td class="usage-hex">#FFE29D</td><td class="usage-desc">Warning badge background</td></tr>
-              <tr><td><span class="usage-dot" style="background:#FED166"></span></td><td class="usage-step">C40</td><td class="usage-hex">#FED166</td><td class="usage-desc">Warning icon fill</td></tr>
-              <tr><td><span class="usage-dot" style="background:#FFC232"></span></td><td class="usage-step">C50</td><td class="usage-hex">#FFC232</td><td class="usage-desc"><strong>Warning color</strong>, alert badges, status indicators</td></tr>
-              <tr><td><span class="usage-dot" style="background:#E4A100"></span></td><td class="usage-step">C60</td><td class="usage-hex">#E4A100</td><td class="usage-desc">Warning text on dark backgrounds, warning borders</td></tr>
-              <tr><td><span class="usage-dot" style="background:#C18700"></span></td><td class="usage-step">C70</td><td class="usage-hex">#C18700</td><td class="usage-desc">Warning dark accent text</td></tr>
-              <tr><td><span class="usage-dot" style="background:#9D6E00"></span></td><td class="usage-step">C80</td><td class="usage-hex">#9D6E00</td><td class="usage-desc">Reserved</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FFF4D9"></span></td><td class="usage-step">C10</td><td class="usage-hex">#FFF4D9</td><td class="usage-desc">Warning notification text on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FFEDC1"></span></td><td class="usage-step">C20</td><td class="usage-hex">#FFEDC1</td><td class="usage-desc">Warning highlight text, toast text on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FFE29D"></span></td><td class="usage-step">C30</td><td class="usage-hex">#FFE29D</td><td class="usage-desc">Warning badge text on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FED166"></span></td><td class="usage-step">C40</td><td class="usage-hex">#FED166</td><td class="usage-desc">Warning icon fill on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FFC232"></span></td><td class="usage-step">C50</td><td class="usage-hex">#FFC232</td><td class="usage-desc"><strong>Warning color</strong>, alert badges, status indicators on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#E4A100"></span></td><td class="usage-step">C60</td><td class="usage-hex">#E4A100</td><td class="usage-desc">Warning borders, warning accent on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#C18700"></span></td><td class="usage-step">C70</td><td class="usage-hex">#C18700</td><td class="usage-desc">Warning muted accent on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#9D6E00"></span></td><td class="usage-step">C80</td><td class="usage-hex">#9D6E00</td><td class="usage-desc">Warning subtle background tint on dark surfaces</td></tr>
               <tr><td><span class="usage-dot" style="background:#745200"></span></td><td class="usage-step">C90</td><td class="usage-hex">#745200</td><td class="usage-desc">Reserved</td></tr>
               <tr><td><span class="usage-dot" style="background:#513800"></span></td><td class="usage-step">C100</td><td class="usage-hex">#513800</td><td class="usage-desc">Reserved</td></tr>
             </tbody>
@@ -1290,7 +1290,7 @@
 
       <div class="section">
         <h2 class="section-title">Red / Error</h2>
-        <p class="section-desc">Error and danger palette for destructive actions, validation errors, and critical alerts. C50 is the core error color.</p>
+        <p class="section-desc">Error and danger palette for destructive actions, validation errors, and critical alerts on dark surfaces. C50 is the core error color.</p>
         <div class="palette-strip">
           <div class="palette-cell"><div class="palette-swatch" style="background:#FDEBE4"></div><div class="palette-label">C10</div><div class="palette-hex">#FDEBE4</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#FFE4D9"></div><div class="palette-label">C20</div><div class="palette-hex">#FFE4D9</div></div>
@@ -1307,14 +1307,14 @@
           <table class="usage-table">
             <thead><tr><th style="width:40px"></th><th>Step</th><th>Hex</th><th>Usage</th></tr></thead>
             <tbody>
-              <tr><td><span class="usage-dot" style="background:#FDEBE4"></span></td><td class="usage-step">C10</td><td class="usage-hex">#FDEBE4</td><td class="usage-desc">Error notification background tint</td></tr>
-              <tr><td><span class="usage-dot" style="background:#FFE4D9"></span></td><td class="usage-step">C20</td><td class="usage-hex">#FFE4D9</td><td class="usage-desc">Error highlight background, inline error banner</td></tr>
-              <tr><td><span class="usage-dot" style="background:#FCBDA2"></span></td><td class="usage-step">C30</td><td class="usage-hex">#FCBDA2</td><td class="usage-desc">Error badge background</td></tr>
-              <tr><td><span class="usage-dot" style="background:#FA9367"></span></td><td class="usage-step">C40</td><td class="usage-hex">#FA9367</td><td class="usage-desc">Error icon fill, light error accent</td></tr>
-              <tr><td><span class="usage-dot" style="background:#E36732"></span></td><td class="usage-step">C50</td><td class="usage-hex">#E36732</td><td class="usage-desc"><strong>Error color</strong>, error borders, error text, input error state, destructive button normal</td></tr>
-              <tr><td><span class="usage-dot" style="background:#D44203"></span></td><td class="usage-step">C60</td><td class="usage-hex">#D44203</td><td class="usage-desc">Destructive button hover state</td></tr>
-              <tr><td><span class="usage-dot" style="background:#AE3501"></span></td><td class="usage-step">C70</td><td class="usage-hex">#AE3501</td><td class="usage-desc">Destructive button click/active state</td></tr>
-              <tr><td><span class="usage-dot" style="background:#802701"></span></td><td class="usage-step">C80</td><td class="usage-hex">#802701</td><td class="usage-desc">Reserved</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FDEBE4"></span></td><td class="usage-step">C10</td><td class="usage-hex">#FDEBE4</td><td class="usage-desc">Error notification text on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FFE4D9"></span></td><td class="usage-step">C20</td><td class="usage-hex">#FFE4D9</td><td class="usage-desc">Error highlight text, inline error banner text on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FCBDA2"></span></td><td class="usage-step">C30</td><td class="usage-hex">#FCBDA2</td><td class="usage-desc">Error badge text on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#FA9367"></span></td><td class="usage-step">C40</td><td class="usage-hex">#FA9367</td><td class="usage-desc">Error icon fill on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#E36732"></span></td><td class="usage-step">C50</td><td class="usage-hex">#E36732</td><td class="usage-desc"><strong>Error color</strong>, error borders, error text, input error state on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#D44203"></span></td><td class="usage-step">C60</td><td class="usage-hex">#D44203</td><td class="usage-desc">Destructive button accent, error border on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#AE3501"></span></td><td class="usage-step">C70</td><td class="usage-hex">#AE3501</td><td class="usage-desc">Destructive button click/active state on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#802701"></span></td><td class="usage-step">C80</td><td class="usage-hex">#802701</td><td class="usage-desc">Error subtle background tint on dark surfaces</td></tr>
               <tr><td><span class="usage-dot" style="background:#5C1C00"></span></td><td class="usage-step">C90</td><td class="usage-hex">#5C1C00</td><td class="usage-desc">Reserved</td></tr>
               <tr><td><span class="usage-dot" style="background:#3C1302"></span></td><td class="usage-step">C100</td><td class="usage-hex">#3C1302</td><td class="usage-desc">Reserved</td></tr>
             </tbody>
@@ -1324,7 +1324,7 @@
 
       <div class="section">
         <h2 class="section-title">Blue / Info</h2>
-        <p class="section-desc">Informational palette for links, active selections, and informational states. C50 is the core info color.</p>
+        <p class="section-desc">Informational palette for links, active selections, and informational states on dark surfaces. C50 is the core info color.</p>
         <div class="palette-strip">
           <div class="palette-cell"><div class="palette-swatch" style="background:#E3EDFF"></div><div class="palette-label">C10</div><div class="palette-hex">#E3EDFF</div></div>
           <div class="palette-cell"><div class="palette-swatch" style="background:#DAE7FD"></div><div class="palette-label">C20</div><div class="palette-hex">#DAE7FD</div></div>
@@ -1341,14 +1341,14 @@
           <table class="usage-table">
             <thead><tr><th style="width:40px"></th><th>Step</th><th>Hex</th><th>Usage</th></tr></thead>
             <tbody>
-              <tr><td><span class="usage-dot" style="background:#E3EDFF"></span></td><td class="usage-step">C10</td><td class="usage-hex">#E3EDFF</td><td class="usage-desc">Info notification background tint</td></tr>
-              <tr><td><span class="usage-dot" style="background:#DAE7FD"></span></td><td class="usage-step">C20</td><td class="usage-hex">#DAE7FD</td><td class="usage-desc">Info highlight background, selected state tint</td></tr>
-              <tr><td><span class="usage-dot" style="background:#B0CDFD"></span></td><td class="usage-step">C30</td><td class="usage-hex">#B0CDFD</td><td class="usage-desc">Focus ring color</td></tr>
-              <tr><td><span class="usage-dot" style="background:#86B1F9"></span></td><td class="usage-step">C40</td><td class="usage-hex">#86B1F9</td><td class="usage-desc">Link hover color</td></tr>
-              <tr><td><span class="usage-dot" style="background:#4C8BF5"></span></td><td class="usage-step">C50</td><td class="usage-hex">#4C8BF5</td><td class="usage-desc"><strong>Info color</strong>, links, active selection indicator</td></tr>
-              <tr><td><span class="usage-dot" style="background:#1C6AED"></span></td><td class="usage-step">C60</td><td class="usage-hex">#1C6AED</td><td class="usage-desc">Link click/active state</td></tr>
-              <tr><td><span class="usage-dot" style="background:#0F56CC"></span></td><td class="usage-step">C70</td><td class="usage-hex">#0F56CC</td><td class="usage-desc">Info dark accent</td></tr>
-              <tr><td><span class="usage-dot" style="background:#0A3D94"></span></td><td class="usage-step">C80</td><td class="usage-hex">#0A3D94</td><td class="usage-desc">Reserved</td></tr>
+              <tr><td><span class="usage-dot" style="background:#E3EDFF"></span></td><td class="usage-step">C10</td><td class="usage-hex">#E3EDFF</td><td class="usage-desc">Info notification text on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#DAE7FD"></span></td><td class="usage-step">C20</td><td class="usage-hex">#DAE7FD</td><td class="usage-desc">Info highlight text, selected state text on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#B0CDFD"></span></td><td class="usage-step">C30</td><td class="usage-hex">#B0CDFD</td><td class="usage-desc">Focus ring color on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#86B1F9"></span></td><td class="usage-step">C40</td><td class="usage-hex">#86B1F9</td><td class="usage-desc">Link hover color on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#4C8BF5"></span></td><td class="usage-step">C50</td><td class="usage-hex">#4C8BF5</td><td class="usage-desc"><strong>Info color</strong>, links, active selection indicator on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#1C6AED"></span></td><td class="usage-step">C60</td><td class="usage-hex">#1C6AED</td><td class="usage-desc">Link click/active state on dark backgrounds</td></tr>
+              <tr><td><span class="usage-dot" style="background:#0F56CC"></span></td><td class="usage-step">C70</td><td class="usage-hex">#0F56CC</td><td class="usage-desc">Info muted accent on dark surfaces</td></tr>
+              <tr><td><span class="usage-dot" style="background:#0A3D94"></span></td><td class="usage-step">C80</td><td class="usage-hex">#0A3D94</td><td class="usage-desc">Info subtle background tint on dark surfaces</td></tr>
               <tr><td><span class="usage-dot" style="background:#072964"></span></td><td class="usage-step">C90</td><td class="usage-hex">#072964</td><td class="usage-desc">Reserved</td></tr>
               <tr><td><span class="usage-dot" style="background:#041C44"></span></td><td class="usage-step">C100</td><td class="usage-hex">#041C44</td><td class="usage-desc">Reserved</td></tr>
             </tbody>
