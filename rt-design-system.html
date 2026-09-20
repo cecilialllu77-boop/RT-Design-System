@@ -3,26 +3,31 @@
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
   :root {
-    --bg: #0F1215;
+    --bg: #161A1D;
     --bg-elevated: #161A1D;
-    --bg-surface: #1E2228;
-    --bg-surface-2: #23262B;
-    --bg-surface-3: #2B2F36;
-    --fg: #DCE0F2;
-    --fg-title: #CFCFCF;
-    --fg-muted: #7B808E;
-    --fg-faint: #949393;
-    --border: #2B2F36;
-    --border-subtle: #23262B;
-    --primary: #3B9B4D;
-    --primary-50: rgba(59, 155, 77, 0.5);
-    --primary-10: rgba(59, 155, 77, 0.1);
+    --bg-surface: #21272B;
+    --bg-surface-2: #21272B;
+    --bg-surface-3: #333B42;
+    --fg: #E7ECF0;
+    --fg-title: #D0DAE1;
+    --fg-muted: #97A5AF;
+    --fg-faint: #B2C1CC;
+    --border: #333B42;
+    --border-subtle: #21272B;
+    --primary: #1F7F31;
+    --primary-hover: #3B9B4D;
+    --primary-active: #196728;
+    --primary-disabled: #134E1E;
+    --primary-50: rgba(31, 127, 49, 0.5);
+    --primary-10: rgba(31, 127, 49, 0.1);
     --warning: #FFC232;
     --error: #E36732;
     --info: #4C8BF5;
-    --btn-gray: #5A5D69;
-    --btn-gray-2: #7B808E;
-    --btn-icon: #B3B9CC;
+    --btn-gray: #5A6772;
+    --btn-gray-hover: #75818A;
+    --btn-gray-active: #4B555D;
+    --btn-gray-disabled: #333B42;
+    --btn-icon: #B2C1CC;
     --sidebar-w: 240px;
     --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
     --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
@@ -118,8 +123,8 @@
     cursor: pointer;
   }
 
-  .nav-link:hover { color: var(--fg); background: var(--bg-surface-3); }
-  .nav-link.active { color: var(--primary); background: var(--primary-10); }
+  .nav-link:hover { color: var(--fg); background: #333B42; }
+  .nav-link.active { color: #3B9B4D; background: var(--primary-10); }
 
   /* Main content */
   .main {
@@ -517,7 +522,7 @@
     height: 10px;
     background: var(--primary-10);
     border-radius: 3px;
-    border: 1px solid rgba(59, 155, 77, 0.2);
+    border: 1px solid rgba(31, 127, 49, 0.2);
   }
 
   .spacing-val {
@@ -554,12 +559,14 @@
     font-size: 13px;
   }
 
-  .btn-primary { background: #3B9B4D; color: #fff; }
-  .btn-primary:hover:not(:disabled) { background: #4EB962; }
-  .btn-primary:active:not(:disabled) { background: #2E8740; }
-  .btn-secondary { background: #5A5D69; color: #fff; }
-  .btn-secondary:hover:not(:disabled) { background: #7B7F8E; }
-  .btn-secondary:active:not(:disabled) { background: #3E4048; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+  .btn-primary:active:not(:disabled) { background: var(--primary-active); }
+  .btn-primary:disabled { background: var(--primary-disabled); opacity: 0.6; cursor: not-allowed; }
+  .btn-secondary { background: var(--btn-gray); color: #fff; }
+  .btn-secondary:hover:not(:disabled) { background: var(--btn-gray-hover); }
+  .btn-secondary:active:not(:disabled) { background: var(--btn-gray-active); }
+  .btn-secondary:disabled { background: var(--btn-gray-disabled); opacity: 0.6; cursor: not-allowed; }
   .btn-disabled { opacity: 0.5; cursor: not-allowed; }
   .btn-disabled:hover { opacity: 0.5; }
 
@@ -712,7 +719,7 @@
 
   .cal-label {
     font-size: 14px;
-    color: #CFCFCF;
+    color: #D0DAE1;
     white-space: nowrap;
   }
 
@@ -725,7 +732,7 @@
   .cal-input {
     width: 100%;
     height: 100%;
-    background: #2B2F36;
+    background: #333B42;
     border: 1px solid transparent;
     border-radius: 2px;
     padding: 0 32px 0 10px;
@@ -738,7 +745,7 @@
   }
 
   .cal-input::placeholder { color: var(--fg-muted); }
-  .cal-input:hover:not(:disabled) { border-color: var(--primary); }
+  .cal-input:hover:not(:disabled) { border-color: var(--primary-hover); }
   .cal-input:focus:not(:disabled) { border-color: var(--primary); }
   .cal-input:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -751,7 +758,7 @@
   .input-field {
     width: 250px;
     height: 30px;
-    background: #2B2F36;
+    background: #333B42;
     border: 1px solid transparent;
     border-radius: 2px;
     padding: 0 10px;
@@ -762,7 +769,7 @@
     transition: border-color 0.15s;
   }
   .input-field::placeholder { color: var(--fg-muted); }
-  .input-field:hover:not(:disabled) { border-color: var(--primary); }
+  .input-field:hover:not(:disabled) { border-color: var(--primary-hover); }
   .input-field:focus:not(:disabled) { border-color: var(--primary); }
   .input-field:disabled { opacity: 0.5; cursor: not-allowed; }
   .input-field.input-error { border-color: var(--error); }
@@ -817,7 +824,7 @@
   .input-field-sm {
     width: 250px;
     height: 22px;
-    background: #2B2F36;
+    background: #333B42;
     border: 1px solid transparent;
     border-radius: 2px;
     padding: 0 10px;
@@ -828,7 +835,7 @@
     transition: border-color 0.15s;
   }
   .input-field-sm::placeholder { color: var(--fg-muted); }
-  .input-field-sm:hover:not(:disabled) { border-color: var(--primary); }
+  .input-field-sm:hover:not(:disabled) { border-color: var(--primary-hover); }
   .input-field-sm:focus:not(:disabled) { border-color: var(--primary); }
   .input-field-sm:disabled { opacity: 0.5; cursor: not-allowed; }
   .input-field-sm.input-error { border-color: var(--error); }
@@ -848,7 +855,7 @@
     transform: translateY(-50%);
     width: 18px;
     height: 18px;
-    color: #7B808E;
+    color: #97A5AF;
     pointer-events: none;
   }
 
@@ -858,7 +865,7 @@
     left: 0;
     margin-top: 4px;
     width: 252px;
-    background: #2B2F36;
+    background: #333B42;
     border-radius: 2px;
     box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
     z-index: 300;
@@ -899,7 +906,7 @@
     justify-content: center;
     background: none;
     border: none;
-    color: #7B808E;
+    color: #97A5AF;
     cursor: pointer;
     font-size: 14px;
     padding: 0;
@@ -932,7 +939,7 @@
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    color: #CFCFCF;
+    color: #D0DAE1;
   }
 
   .cal-days {
@@ -972,7 +979,7 @@
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    color: #DCE0F2;
+    color: #E7ECF0;
     border-radius: 2px;
     cursor: pointer;
     transition: background 0.1s;
@@ -982,18 +989,18 @@
     padding: 0;
   }
 
-  .cal-day:hover { background: rgba(59,155,77,0.1); color: #fff; }
-  .cal-day.other-month { color: #949393; }
-  .cal-day.other-month:hover { color: #949393; background: none; cursor: default; }
-  .cal-day.selected { background: rgba(59,155,77,0.5); color: #fff; }
-  .cal-day.selected:hover { background: rgba(59,155,77,0.5); }
-  .cal-day.range-start { background: rgba(59,155,77,0.5); color: #fff; border-radius: 2px 0 0 2px; }
-  .cal-day.range-end { background: rgba(59,155,77,0.5); color: #fff; border-radius: 0 2px 2px 0; }
+  .cal-day:hover { background: rgba(31,127,49,0.15); color: #fff; }
+  .cal-day.other-month { color: #75818A; }
+  .cal-day.other-month:hover { color: #75818A; background: none; cursor: default; }
+  .cal-day.selected { background: rgba(31,127,49,0.5); color: #fff; }
+  .cal-day.selected:hover { background: rgba(31,127,49,0.5); }
+  .cal-day.range-start { background: rgba(31,127,49,0.5); color: #fff; border-radius: 2px 0 0 2px; }
+  .cal-day.range-end { background: rgba(31,127,49,0.5); color: #fff; border-radius: 0 2px 2px 0; }
   .cal-day.range-start.range-end { border-radius: 2px; }
-  .cal-day.in-range { background: rgba(59,155,77,0.15); color: #fff; border-radius: 0; }
-  .cal-day.in-range:hover { background: rgba(59,155,77,0.3); }
-  .cal-day.hover-in-range { background: rgba(59,155,77,0.15); color: #fff; border-radius: 0; }
-  .cal-day.hover-range-end { background: rgba(59,155,77,0.5); color: #fff; }
+  .cal-day.in-range { background: rgba(31,127,49,0.15); color: #fff; border-radius: 0; }
+  .cal-day.in-range:hover { background: rgba(31,127,49,0.3); }
+  .cal-day.hover-in-range { background: rgba(31,127,49,0.15); color: #fff; border-radius: 0; }
+  .cal-day.hover-range-end { background: rgba(31,127,49,0.5); color: #fff; }
 
   .cal-range-inputs {
     display: flex;
@@ -1012,7 +1019,7 @@
     left: 0;
     margin-top: 4px;
     width: 504px;
-    background: #2B2F36;
+    background: #333B42;
     border-radius: 2px;
     box-shadow: 0px 2px 5px rgba(0,0,0,0.4);
     z-index: 300;
@@ -1048,7 +1055,7 @@
     justify-content: center;
     font-size: 14px;
     font-family: var(--font-sans);
-    color: #DCE0F2;
+    color: #E7ECF0;
     background: none;
     border: none;
     border-radius: 2px;
@@ -1057,8 +1064,8 @@
     padding: 0;
   }
 
-  .cal-month-btn:hover { background: rgba(59,155,77,0.1); color: #fff; }
-  .cal-month-btn.selected { background: rgba(59,155,77,0.5); color: #fff; }
+  .cal-month-btn:hover { background: rgba(31,127,49,0.15); color: #fff; }
+  .cal-month-btn.selected { background: rgba(31,127,49,0.5); color: #fff; }
 
   .cal-years {
     display: grid;
@@ -1076,7 +1083,7 @@
     justify-content: center;
     font-size: 14px;
     font-family: var(--font-sans);
-    color: #DCE0F2;
+    color: #E7ECF0;
     background: none;
     border: none;
     border-radius: 2px;
@@ -1085,8 +1092,8 @@
     padding: 0;
   }
 
-  .cal-year-btn:hover { background: rgba(59,155,77,0.1); color: #fff; }
-  .cal-year-btn.selected { background: rgba(59,155,77,0.5); color: #fff; }
+  .cal-year-btn:hover { background: rgba(31,127,49,0.15); color: #fff; }
+  .cal-year-btn.selected { background: rgba(31,127,49,0.5); color: #fff; }
 
   /* Mobile hamburger */
   .hamburger {
@@ -1139,7 +1146,7 @@
 
 <aside class="sidebar">
   <div class="sidebar-header">
-    <div class="sidebar-logo"><svg width="32" height="20" viewBox="0 0 63 40" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.7841 36.5372C22.8806 36.6974 23.9771 36.9172 25.083 36.9996C29.4644 37.3201 33.0619 35.6398 36.1508 32.7278C37.8212 31.1528 39.5243 29.6006 41.0921 27.9295C41.9273 27.0366 42.5059 27.0504 43.5277 27.6639C47.8251 30.2325 53.233 29.097 56.0046 25.1503C58.7482 21.2493 57.9224 15.8878 54.1149 12.8935C50.4427 10.0135 45.2215 10.3157 41.7593 13.681C36.2861 18.9967 30.8548 24.3582 25.3909 29.6876C20.5103 34.4448 13.9779 35.6489 8.18736 32.888C1.84625 29.8616 -1.34996 22.9709 0.539771 16.1076C2.16354 10.215 8.36467 5.21978 15.275 5.81499C15.9236 5.86994 16.6562 5.728 17.1974 5.9844C19.4184 7.05121 20.7109 5.89741 22.1621 4.42311C27.1267 -0.622468 34.5083 -1.40998 40.1262 2.36276C40.4668 2.59168 40.7701 2.87556 41.3627 3.35173C40.7048 3.35173 40.3642 3.41125 40.0562 3.34257C35.4042 2.37191 31.2654 3.42498 27.7286 6.4972C25.6709 8.28742 23.7392 10.2104 21.8214 12.138C21.0655 12.898 20.529 13.0812 19.5211 12.4448C15.4103 9.86244 10.1331 10.8056 7.23083 14.5234C4.3799 18.1817 4.76251 23.4699 8.10337 26.5238C11.7895 29.8982 17.2021 30.0722 20.8369 26.652C26.4688 21.3455 31.9467 15.8741 37.4619 10.4485C42.5945 5.39834 49.5142 4.24455 55.4914 7.49533C60.6146 10.2791 63.5776 15.984 62.9057 21.7621C62.2571 27.2885 57.871 32.2196 52.2998 33.7534C49.7942 34.4448 47.3025 34.4631 44.8202 33.7763C43.593 33.4375 42.7205 33.6389 41.834 34.6233C38.9784 37.7825 35.5115 39.8246 31.0648 39.9894C27.5046 40.1222 24.4251 39.0096 21.7841 36.5372Z" fill="url(#paint0_linear_logo)"/><defs><linearGradient id="paint0_linear_logo" x1="31.5" y1="0" x2="31.5" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#97E4AA"/><stop offset="1" stop-color="#3B9B4D"/></linearGradient></defs></svg></div>
+    <div class="sidebar-logo"><svg width="32" height="20" viewBox="0 0 63 40" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.7841 36.5372C22.8806 36.6974 23.9771 36.9172 25.083 36.9996C29.4644 37.3201 33.0619 35.6398 36.1508 32.7278C37.8212 31.1528 39.5243 29.6006 41.0921 27.9295C41.9273 27.0366 42.5059 27.0504 43.5277 27.6639C47.8251 30.2325 53.233 29.097 56.0046 25.1503C58.7482 21.2493 57.9224 15.8878 54.1149 12.8935C50.4427 10.0135 45.2215 10.3157 41.7593 13.681C36.2861 18.9967 30.8548 24.3582 25.3909 29.6876C20.5103 34.4448 13.9779 35.6489 8.18736 32.888C1.84625 29.8616 -1.34996 22.9709 0.539771 16.1076C2.16354 10.215 8.36467 5.21978 15.275 5.81499C15.9236 5.86994 16.6562 5.728 17.1974 5.9844C19.4184 7.05121 20.7109 5.89741 22.1621 4.42311C27.1267 -0.622468 34.5083 -1.40998 40.1262 2.36276C40.4668 2.59168 40.7701 2.87556 41.3627 3.35173C40.7048 3.35173 40.3642 3.41125 40.0562 3.34257C35.4042 2.37191 31.2654 3.42498 27.7286 6.4972C25.6709 8.28742 23.7392 10.2104 21.8214 12.138C21.0655 12.898 20.529 13.0812 19.5211 12.4448C15.4103 9.86244 10.1331 10.8056 7.23083 14.5234C4.3799 18.1817 4.76251 23.4699 8.10337 26.5238C11.7895 29.8982 17.2021 30.0722 20.8369 26.652C26.4688 21.3455 31.9467 15.8741 37.4619 10.4485C42.5945 5.39834 49.5142 4.24455 55.4914 7.49533C60.6146 10.2791 63.5776 15.984 62.9057 21.7621C62.2571 27.2885 57.871 32.2196 52.2998 33.7534C49.7942 34.4448 47.3025 34.4631 44.8202 33.7763C43.593 33.4375 42.7205 33.6389 41.834 34.6233C38.9784 37.7825 35.5115 39.8246 31.0648 39.9894C27.5046 40.1222 24.4251 39.0096 21.7841 36.5372Z" fill="url(#paint0_linear_logo)"/><defs><linearGradient id="paint0_linear_logo" x1="31.5" y1="0" x2="31.5" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#75D186"/><stop offset="1" stop-color="#1F7F31"/></linearGradient></defs></svg></div>
     <div class="sidebar-brand">
       RT Design System
       <span>Radiotherapy Cloud</span>
@@ -1401,26 +1408,26 @@
           </div>
           <div class="type-row">
             <span class="type-label">P1</span>
-            <div class="type-sample" style="font-size:14px;font-weight:400;color:#DCE0F2">Content Text</div>
+            <div class="type-sample" style="font-size:14px;font-weight:400;color:#E7ECF0">Content Text</div>
             <div class="type-meta">
-              <span class="type-meta-line"><span class="type-color-dot" style="background:#DCE0F2"></span>14px / 400</span>
-              <span class="type-meta-line">#DCE0F2</span>
+              <span class="type-meta-line"><span class="type-color-dot" style="background:#E7ECF0"></span>14px / 400</span>
+              <span class="type-meta-line">#E7ECF0</span>
             </div>
           </div>
           <div class="type-row">
             <span class="type-label">H2</span>
-            <div class="type-sample" style="font-size:16px;font-weight:600;color:#DCE0F2">Secondary Title</div>
+            <div class="type-sample" style="font-size:16px;font-weight:600;color:#E7ECF0">Secondary Title</div>
             <div class="type-meta">
-              <span class="type-meta-line"><span class="type-color-dot" style="background:#DCE0F2"></span>16px / 600</span>
-              <span class="type-meta-line">#DCE0F2</span>
+              <span class="type-meta-line"><span class="type-color-dot" style="background:#E7ECF0"></span>16px / 600</span>
+              <span class="type-meta-line">#E7ECF0</span>
             </div>
           </div>
           <div class="type-row">
             <span class="type-label">P2</span>
-            <div class="type-sample" style="font-size:12px;font-weight:400;color:#CFCFCF">Secondary Text</div>
+            <div class="type-sample" style="font-size:12px;font-weight:400;color:#D0DAE1">Secondary Text</div>
             <div class="type-meta">
-              <span class="type-meta-line"><span class="type-color-dot" style="background:#CFCFCF"></span>12px / 400</span>
-              <span class="type-meta-line">#CFCFCF</span>
+              <span class="type-meta-line"><span class="type-color-dot" style="background:#D0DAE1"></span>12px / 400</span>
+              <span class="type-meta-line">#D0DAE1</span>
             </div>
           </div>
         </div>
@@ -1839,14 +1846,14 @@
           <table class="props-table">
             <thead><tr><th>Token</th><th>Value</th><th>Description</th></tr></thead>
             <tbody>
-              <tr><td><code>background</code></td><td><code>#2B2F36</code></td><td>Input background color</td></tr>
+              <tr><td><code>background</code></td><td><code>#333B42</code></td><td>Input background color (Grey C80)</td></tr>
               <tr><td><code>border-radius</code></td><td><code>2px</code></td><td>Corner radius</td></tr>
               <tr><td><code>border-default</code></td><td><code>transparent</code></td><td>Default border (invisible)</td></tr>
-              <tr><td><code>border-hover</code></td><td><code>var(--primary) / #3B9B4D</code></td><td>Border on hover</td></tr>
-              <tr><td><code>border-focus</code></td><td><code>var(--primary) / #3B9B4D</code></td><td>Border on focus</td></tr>
+              <tr><td><code>border-hover</code></td><td><code>#3B9B4D</code></td><td>Border on hover (Green C50)</td></tr>
+              <tr><td><code>border-focus</code></td><td><code>#1F7F31</code></td><td>Border on focus (Green C60)</td></tr>
               <tr><td><code>border-error</code></td><td><code>var(--error)</code></td><td>Border on error state</td></tr>
-              <tr><td><code>text-color</code></td><td><code>#DCE0F2</code></td><td>Input text color</td></tr>
-              <tr><td><code>placeholder-color</code></td><td><code>#7B808E</code></td><td>Placeholder text color</td></tr>
+              <tr><td><code>text-color</code></td><td><code>#E7ECF0</code></td><td>Input text color (Grey C10)</td></tr>
+              <tr><td><code>placeholder-color</code></td><td><code>#97A5AF</code></td><td>Placeholder text color (Grey C40)</td></tr>
               <tr><td><code>font-size</code></td><td><code>14px</code></td><td>Input text size (default)</td></tr>
               <tr><td><code>font-size-sm</code></td><td><code>12px</code></td><td>Input text size (small)</td></tr>
               <tr><td><code>height</code></td><td><code>30px</code></td><td>Input field height (default)</td></tr>
@@ -1900,9 +1907,9 @@
             <thead><tr><th>Name</th><th>Size</th><th>Weight</th><th>Color</th><th></th></tr></thead>
             <tbody>
               <tr><td class="token-name">H1 &mdash; Primary Title</td><td class="token-hex">18px</td><td>600</td><td class="token-hex">#FFFFFF</td><td><span class="token-dot" style="background:#FFFFFF"></span></td></tr>
-              <tr><td class="token-name">P1 &mdash; Content Text</td><td class="token-hex">14px</td><td>400</td><td class="token-hex">#DCE0F2</td><td><span class="token-dot" style="background:#DCE0F2"></span></td></tr>
-              <tr><td class="token-name">H2 &mdash; Secondary Title</td><td class="token-hex">16px</td><td>600</td><td class="token-hex">#DCE0F2</td><td><span class="token-dot" style="background:#DCE0F2"></span></td></tr>
-              <tr><td class="token-name">P2 &mdash; Secondary Text</td><td class="token-hex">12px</td><td>400</td><td class="token-hex">#CFCFCF</td><td><span class="token-dot" style="background:#CFCFCF"></span></td></tr>
+              <tr><td class="token-name">P1 &mdash; Content Text</td><td class="token-hex">14px</td><td>400</td><td class="token-hex">#E7ECF0</td><td><span class="token-dot" style="background:#E7ECF0"></span></td></tr>
+              <tr><td class="token-name">H2 &mdash; Secondary Title</td><td class="token-hex">16px</td><td>600</td><td class="token-hex">#E7ECF0</td><td><span class="token-dot" style="background:#E7ECF0"></span></td></tr>
+              <tr><td class="token-name">P2 &mdash; Secondary Text</td><td class="token-hex">12px</td><td>400</td><td class="token-hex">#D0DAE1</td><td><span class="token-dot" style="background:#D0DAE1"></span></td></tr>
             </tbody>
           </table>
         </div>
@@ -1939,33 +1946,34 @@
 
   const colorTokens = [
     { group: 'Primary', tokens: [
-      { name: 'Primary Green', token: '--primary', value: '#3B9B4D', desc: 'Main buttons, labels' },
-      { name: 'White', token: '--white', value: '#FFFFFF', desc: 'Modal titles, button text' },
-      { name: 'Dark', token: '--dark', value: '#161A1D', desc: 'Main background' },
-    ]},
-    { group: 'Green Extended', tokens: [
-      { name: 'Primary Green 50%', token: '--primary-50', value: 'rgba(59,155,77,0.5)', swatch: '#3B9B4D80', desc: 'Selected state' },
+      { name: 'Primary Green (C60)', token: '--primary', value: '#1F7F31', desc: 'Primary button normal, brand accent' },
+      { name: 'Primary Hover (C50)', token: '--primary-hover', value: '#3B9B4D', desc: 'Primary button hover' },
+      { name: 'Primary Active (C70)', token: '--primary-active', value: '#196728', desc: 'Primary button click' },
+      { name: 'Primary Disabled (C80)', token: '--primary-disabled', value: '#134E1E', desc: 'Primary button disabled' },
+      { name: 'White (C00)', token: '--white', value: '#FFFFFF', desc: 'Button text, modal titles' },
     ]},
     { group: 'Text', tokens: [
-      { name: 'Title Text', token: '--text-title', value: '#CFCFCF', desc: 'Title text' },
-      { name: 'Content Text', token: '--text-content', value: '#DCE0F2', desc: 'Main content text' },
-      { name: 'Placeholder', token: '--text-placeholder', value: '#7B808E', desc: 'Placeholder text' },
-      { name: 'Readonly', token: '--text-readonly', value: '#949393', desc: 'Read-only text' },
+      { name: 'Body Text (C10)', token: '--fg', value: '#E7ECF0', desc: 'Primary body text' },
+      { name: 'Title Text (C20)', token: '--fg-title', value: '#D0DAE1', desc: 'Title text' },
+      { name: 'Muted Text (C40)', token: '--fg-muted', value: '#97A5AF', desc: 'Placeholder, muted text' },
+      { name: 'Faint Text (C30)', token: '--fg-faint', value: '#B2C1CC', desc: 'Secondary icons' },
     ]},
     { group: 'Background', tokens: [
-      { name: 'Top Section', token: '--bg-top', value: '#1E2228', desc: 'Top section area' },
-      { name: 'Sidebar', token: '--bg-sidebar', value: '#23262B', desc: 'Left sidebar' },
-      { name: 'Surface', token: '--bg-surface', value: '#2B2F36', desc: 'Inputs, tables, top bar' },
+      { name: 'Page Base (C100)', token: '--bg', value: '#161A1D', desc: 'Main page background' },
+      { name: 'Sidebar / Top Bar (C90)', token: '--bg-surface', value: '#21272B', desc: 'Sidebar, top bar, panels' },
+      { name: 'Input / Card (C80)', token: '--bg-surface-3', value: '#333B42', desc: 'Input bg, card bg, borders' },
     ]},
-    { group: 'Button', tokens: [
-      { name: 'Gray Primary', token: '--btn-gray-primary', value: '#5A5D69', desc: 'Gray btn (white text)' },
-      { name: 'Button Icon', token: '--btn-icon', value: '#B3B9CC', desc: 'Icon color' },
-      { name: 'Gray Secondary', token: '--btn-gray-secondary', value: '#7B808E', desc: 'Gray btn (dark text)' },
+    { group: 'Secondary Button', tokens: [
+      { name: 'Normal (C60)', token: '--btn-gray', value: '#5A6772', desc: 'Secondary button normal' },
+      { name: 'Hover (C50)', token: '--btn-gray-hover', value: '#75818A', desc: 'Secondary button hover' },
+      { name: 'Active (C70)', token: '--btn-gray-active', value: '#4B555D', desc: 'Secondary button click' },
+      { name: 'Disabled (C80)', token: '--btn-gray-disabled', value: '#333B42', desc: 'Secondary button disabled' },
+      { name: 'Button Icon (C30)', token: '--btn-icon', value: '#B2C1CC', desc: 'Icon color' },
     ]},
     { group: 'Alert', tokens: [
-      { name: 'Warning', token: '--warning', value: '#FFC232', desc: '' },
-      { name: 'Error', token: '--error', value: '#E36732', desc: '' },
-      { name: 'Info', token: '--info', value: '#4C8BF5', desc: '' },
+      { name: 'Warning (C50)', token: '--warning', value: '#FFC232', desc: 'Warning alerts, badges' },
+      { name: 'Error (C50)', token: '--error', value: '#E36732', desc: 'Error borders, text' },
+      { name: 'Info (C50)', token: '--info', value: '#4C8BF5', desc: 'Links, info indicators' },
     ]},
   ];
 
@@ -1998,7 +2006,7 @@
   const stb = document.getElementById('token-spacing-body');
   spacingData.forEach(s => {
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td class="token-name">spacing-${s.name}</td><td class="token-hex">${s.value}</td><td><div style="height:8px;background:rgba(59,155,77,0.15);border:1px solid rgba(59,155,77,0.2);border-radius:3px;width:${s.value};max-width:100%"></div></td>`;
+    tr.innerHTML = `<td class="token-name">spacing-${s.name}</td><td class="token-hex">${s.value}</td><td><div style="height:8px;background:rgba(31,127,49,0.15);border:1px solid rgba(31,127,49,0.2);border-radius:3px;width:${s.value};max-width:100%"></div></td>`;
     stb.appendChild(tr);
   });
 
